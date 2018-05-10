@@ -6,10 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+  collapsible: boolean = true;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
+  }
+
+  toggleMenu() {
+    this.collapsible = !this.collapsible;
   }
 
 }

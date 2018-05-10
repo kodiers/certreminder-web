@@ -1,3 +1,31 @@
-<p>
-  header works!
-</p>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" routerLink="/">Re:Minder</a>
+  <button class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          [attr.aria-expanded]="!collapsible"
+          aria-label="Toggle navigation"
+          (click)="toggleMenu()">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" [ngbCollapse]="collapsible">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" routerLink="/">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link">Link</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link">Disabled</a>
+      </li>
+    </ul>
+    <ul class="nav justify-content-end">
+      <li class="nav-item">
+        <a class="nav-link">Sign In</a>
+      </li>
+    </ul>
+  </div>
+</nav>
