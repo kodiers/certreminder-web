@@ -1,4 +1,5 @@
 import {Action} from '@ngrx/store';
+import {Profile} from '../../shared/models/profile.model';
 
 export const TRY_SIGNUP = 'TRY_SIGNUP';
 export const SIGNUP = 'SIGNUP';
@@ -6,6 +7,7 @@ export const TRY_SIGNIN = 'TRY_SIGNIN';
 export const SIGNIN = 'SIGNIN';
 export const LOGOUT = 'LOGOUT';
 export const SET_TOKEN = 'SET_TOKEN';
+export const GET_PROFILE = 'GET_PROFILE';
 
 export class TrySignup implements Action {
   readonly type = TRY_SIGNUP;
@@ -37,4 +39,10 @@ export class SetToken implements Action {
   constructor(public payload: string) {}
 }
 
-export type AuthActions = Signup | Signin | Logout | SetToken | TrySignup | TrySignin;
+export class GetProfile implements Action {
+  readonly type = GET_PROFILE;
+
+  constructor(public payload: Profile) {}
+}
+
+export type AuthActions = Signup | Signin | Logout | SetToken | TrySignup | TrySignin | GetProfile;
