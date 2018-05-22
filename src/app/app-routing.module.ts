@@ -7,7 +7,6 @@ import {NotFoundComponent} from './core/not-found/not-found.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'auth', loadChildren: './auth/auth-routing.module.ts#AuthRoutingModule'},
   { path: '**', component: NotFoundComponent }
 ];
 
