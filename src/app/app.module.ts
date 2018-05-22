@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import {HttpClient} from '@angular/common/http';
 
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
@@ -21,10 +22,10 @@ import { NotFoundComponent } from './core/not-found/not-found.component';
   imports: [
     BrowserModule,
     NgbModule.forRoot(),
+    AuthModule,
     AppRoutingModule,
-    AuthModule
   ],
-  providers: [],
+  providers: [HttpClient],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
