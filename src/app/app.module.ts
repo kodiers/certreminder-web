@@ -6,6 +6,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AuthModule} from './auth/auth.module';
+import {SharedModule} from './shared/shared.module';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './core/header/header.component';
@@ -23,6 +24,7 @@ import { NotFoundComponent } from './core/not-found/not-found.component';
     BrowserModule,
     NgbModule.forRoot(),
     AuthModule,
+    SharedModule,
     AppRoutingModule,
     HttpClientModule
   ],
