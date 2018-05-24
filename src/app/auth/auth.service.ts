@@ -11,8 +11,9 @@ export class AuthService {
 
   registerUser(username: string, password: string, password_confirmation: string) {
     let url = `${API_URL}people/register/`;
-    this.httpClient.post(url, {"username": username, "password": password, "confirm_password": password_confirmation}).subscribe((response) => {
-      console.log(response)
+    this.httpClient.post(url, {"username": username, "password": password, "confirm_password": password_confirmation}).map((response) => {
+      console.log(response);
+      return response;
     });
   }
 }

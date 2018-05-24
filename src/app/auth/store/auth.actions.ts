@@ -12,7 +12,7 @@ export const GET_PROFILE = 'GET_PROFILE';
 export class TrySignup implements Action {
   readonly type = TRY_SIGNUP;
 
-  constructor(public payload: {username: string, password: string}) {}
+  constructor(public payload: {username: string, password: string, confirm_password: string}) {}
 }
 
 export class TrySignin implements Action {
