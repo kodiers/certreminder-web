@@ -11,12 +11,14 @@ import { SignupComponent } from './signup/signup.component';
 import {AuthService} from './auth.service';
 import {AuthRoutingModule} from './auth-routing.module';
 import { PasswordRules } from './validators/password-rules.directive';
+import { ValidateEqual } from './validators/validate-equal.directive';
 
 @NgModule({
   declarations: [
     SigninComponent,
     SignupComponent,
-    PasswordRules
+    PasswordRules,
+    ValidateEqual
   ],
   imports: [
     CommonModule,
