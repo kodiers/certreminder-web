@@ -8,6 +8,7 @@ export const SIGNIN = 'SIGNIN';
 export const LOGOUT = 'LOGOUT';
 export const SET_TOKEN = 'SET_TOKEN';
 export const GET_PROFILE = 'GET_PROFILE';
+export const HAS_VALID_TOKEN = 'HAS_VALID_TOKEN';
 
 export class TrySignup implements Action {
   readonly type = TRY_SIGNUP;
@@ -43,6 +44,10 @@ export class GetProfile implements Action {
   readonly type = GET_PROFILE;
 
   constructor(public payload: Profile) {}
+}
+
+export class HasValidToken implements Action {
+  readonly type = HAS_VALID_TOKEN;
 }
 
 export type AuthActions = Signup | Signin | Logout | SetToken | TrySignup | TrySignin | GetProfile;

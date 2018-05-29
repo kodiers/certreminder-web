@@ -22,7 +22,7 @@
         <a class="nav-link">Disabled</a>
       </li>
     </ul>
-    <ul class="nav justify-content-end">
+    <ul class="nav justify-content-end" *ngIf="!(authState|async).authenticated; else notLogged">
       <li class="nav-item" routerLinkActive="active">
         <a class="nav-link" routerLink="/signin">Sign In</a>
       </li>
@@ -30,5 +30,12 @@
         <a class="nav-link" routerLink="/signup">Sign Up</a>
       </li>
     </ul>
+    <ng-template #notLogged>
+      <ul class="nav justify-content-end">
+        <li class="nav-item">
+          <a class="nav-link" (click)="onLogOut()">Log Out</a>
+        </li>
+      </ul>
+    </ng-template>
   </div>
 </nav>
