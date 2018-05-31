@@ -62,6 +62,24 @@ export class AuthEffects {
     return [{
       type: fromAuthActions.LOGOUT
     }];
-  })
+  });
+
+  @Effect() authSignin = this.actions$.ofType(fromAuthActions.TRY_SIGNIN).map((action: fromAuthActions.TrySignin) => {
+    return action.payload;
+  }).switchMap((data: {username: string, password: string}) => {
+    return this.authSvc.signinUser(data.username, data.password);
+  }).mergeMap((token: string) => {
+    this.authSvc.setToken(token);
+    this.router.navigate(['/']);
+    return [
+      {
+        type: fromAuthActions.SIGNIN
+      },
+      {
+        type: fromAuthActions.SET_TOKEN,
+        payload: token
+      }
+    ];
+  });
 
 }

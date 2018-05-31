@@ -26,4 +26,11 @@ export class AuthService {
   setToken(token: string) {
     localStorage.setItem('cert_token', token);
   }
+
+  signinUser(username: string, password: string) {
+    let url = `${API_URL}people/api-token-auth/`;
+    return this.httpClient.post(url, {"username": username, "password": password}).map((response: any) => {
+      return response.token;
+    })
+  }
 }

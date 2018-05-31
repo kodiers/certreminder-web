@@ -5,7 +5,6 @@ import {Store} from '@ngrx/store';
 
 import * as fromApp from '../../store/app.reducers';
 import * as fromAuthActions from '../store/auth.actions';
-import {AuthService} from '../auth.service';
 
 
 @Component({
@@ -22,7 +21,6 @@ export class SignupComponent implements OnInit {
 
   onSignup(form: NgForm) {
     if (form.valid) {
-      console.log('valid');
       const username = form.value.username;
       const password = form.value.password;
       const confirm_password = form.value.confirm_password;
