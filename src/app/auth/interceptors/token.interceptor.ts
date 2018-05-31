@@ -19,8 +19,6 @@ export class TokenInterceptor implements HttpInterceptor {
       if (authState.token !== null) {
         const copiedRequest = request.clone({
           setHeaders: {
-            // "Accept": "application/json",
-            // "Content-Type": "application/json",
             "Authorization": `Token ${authState.token}`
           }
         });
