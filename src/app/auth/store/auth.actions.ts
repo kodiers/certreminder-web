@@ -9,6 +9,8 @@ export const LOGOUT = 'LOGOUT';
 export const SET_TOKEN = 'SET_TOKEN';
 export const GET_PROFILE = 'GET_PROFILE';
 export const HAS_VALID_TOKEN = 'HAS_VALID_TOKEN';
+export const SIGNUP_FAILURE = 'SIGNUP_FAILURE';
+export const SIGNIN_FAILURE = 'SIGNIN_FAILURE';
 
 export class TrySignup implements Action {
   readonly type = TRY_SIGNUP;
@@ -50,4 +52,18 @@ export class HasValidToken implements Action {
   readonly type = HAS_VALID_TOKEN;
 }
 
-export type AuthActions = Signup | Signin | Logout | SetToken | TrySignup | TrySignin | GetProfile;
+export class SignupFailure implements Action {
+  readonly type = SIGNUP_FAILURE;
+
+  constructor(public payload: any) {}
+}
+
+export class SigninFailure implements Action {
+  readonly type = SIGNIN_FAILURE;
+
+  constructor(public payload: any) {}
+
+}
+
+export type AuthActions = Signup | Signin | Logout | SetToken | TrySignup | TrySignin | GetProfile | HasValidToken
+  | SigninFailure | SignupFailure;

@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import {NgForm} from '@angular/forms';
+import {Observable} from 'rxjs/Observable';
 
 import {Store} from '@ngrx/store';
 
 import * as fromApp from '../../store/app.reducers';
 import * as fromAuthActions from '../store/auth.actions';
+import * as fromAuth from '../store/auth.reducers';
 
 
 @Component({
@@ -13,10 +15,12 @@ import * as fromAuthActions from '../store/auth.actions';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
+  authState: Observable<fromAuth.State>;
 
   constructor(private store: Store<fromApp.AppState>) { }
 
   ngOnInit() {
+    this.authState = this.store.select('auth');
   }
 
   onSignup(form: NgForm) {

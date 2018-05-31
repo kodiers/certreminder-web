@@ -5,12 +5,14 @@ export interface State {
   token: string;
   authenticated: boolean;
   profile: Profile;
+  errorMessage: any;
 }
 
 const initialState: State = {
   token: null,
   authenticated: false,
-  profile: null
+  profile: null,
+  errorMessage: null
 };
 
 export function authReducer(state = initialState, action: AuthActions.AuthActions) {
@@ -20,7 +22,8 @@ export function authReducer(state = initialState, action: AuthActions.AuthAction
       return {
         ...state,
         authenticated: true,
-        profile: null
+        profile: null,
+        errorMessage: null
       };
     case (AuthActions.LOGOUT):
       return {
@@ -39,6 +42,18 @@ export function authReducer(state = initialState, action: AuthActions.AuthAction
         ...state,
         profile: action.payload,
         token: action.payload.token
+      };
+    case (AuthActions.SIGNUP_FAILURE):
+      return {
+        ...state,
+        authenticated: false,
+        errorMessage: "Error when register new user"
+      };
+    case (AuthActions.SIGNIN_FAILURE):
+      return {
+        ...state,
+        authenticated: false,
+        errorMessage: "Incorrect login/password"
       };
     default:
       return state;

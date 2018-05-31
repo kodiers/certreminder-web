@@ -2,6 +2,9 @@
   <div class="col-md-4 offset-md-4 text-center">
     <h1>Sign Up</h1>
     <form (ngSubmit)="onSignup(f)" #f="ngForm">
+      <div *ngIf="(authState|async).errorMessage !== null" class="alert alert-danger">
+        {{(authState|async).errorMessage}}
+      </div>
       <div class="form-group">
         <label for="username">Enter your username:</label>
         <input
