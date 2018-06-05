@@ -42,4 +42,20 @@ export class AuthService {
       return Observable.of(data);
     });
   }
+
+  verifyToken() {
+    let url = `${API_URL}people/api-token-verify/`;
+    let token = this.getToken();
+    if (token) {
+      return this.httpClient.post(url, {"token": token}).map((response: any) => {
+        return {token: response.token, error: null}
+      }).catch(error => {
+        const data = {token: null, error: error};
+        return Observable.of(data);
+      });
+    }
+    const error = 'No token';
+    const data = {token: null, error: error};
+    return Observable.of(data);
+  }
 }

@@ -19,6 +19,7 @@ import {AuthEffects} from './auth/store/auth.effects';
 import {TokenInterceptor} from './auth/interceptors/token.interceptor';
 import {JsonInterceptor} from './core/interceptors/json.interceptor';
 
+
 @NgModule({
   declarations: [
     AppComponent,

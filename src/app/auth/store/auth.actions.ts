@@ -9,6 +9,7 @@ export const LOGOUT = 'LOGOUT';
 export const SET_TOKEN = 'SET_TOKEN';
 export const GET_PROFILE = 'GET_PROFILE';
 export const HAS_VALID_TOKEN = 'HAS_VALID_TOKEN';
+export const VERIFY_TOKEN = 'VERIFY_TOKEN';
 export const SIGNUP_FAILURE = 'SIGNUP_FAILURE';
 export const SIGNIN_FAILURE = 'SIGNIN_FAILURE';
 
@@ -65,5 +66,11 @@ export class SigninFailure implements Action {
 
 }
 
+export class VerifyToken implements Action {
+  readonly type = VERIFY_TOKEN;
+
+  constructor(public payload: any) {}
+}
+
 export type AuthActions = Signup | Signin | Logout | SetToken | TrySignup | TrySignin | GetProfile | HasValidToken
-  | SigninFailure | SignupFailure;
+  | SigninFailure | SignupFailure | VerifyToken;

@@ -55,12 +55,14 @@ export class AuthEffects {
 
   @Effect() hasValidToken = this.actions$.ofType(fromAuthActions.HAS_VALID_TOKEN).map(() => {
     return this.authSvc.getToken();
-  }).mergeMap((token: string) => {
-    if (token) {
+  }).switchMap((token: string) => {
+    return this.authSvc.verifyToken();
+  }).mergeMap(data => {
+    if (data.error === null) {
       return [
         {
           type: fromAuthActions.SET_TOKEN,
-          payload: token
+          payload: data.token
         },
         {
           type: fromAuthActions.SIGNIN

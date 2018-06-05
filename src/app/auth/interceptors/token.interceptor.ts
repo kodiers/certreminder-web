@@ -15,7 +15,6 @@ export class TokenInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return this.store.select('auth').take(1).switchMap((authState: fromAuth.State) => {
-      console.log('token interceptor');
       if (authState.token !== null) {
         const copiedRequest = request.clone({
           setHeaders: {
@@ -24,7 +23,6 @@ export class TokenInterceptor implements HttpInterceptor {
         });
         return next.handle(copiedRequest);
       }
-      console.log('no token');
       return next.handle(request);
     });
   }
