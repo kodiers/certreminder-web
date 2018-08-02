@@ -4,11 +4,12 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {StoreModule} from '@ngrx/store';
+import {EffectsModule} from '@ngrx/effects';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AuthModule} from './auth/auth.module';
 import {SharedModule} from './shared/shared.module';
-import {EffectsModule} from '@ngrx/effects';
+import {UserCertificationsModule} from './user-certifications/user-certifications.module';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './core/header/header.component';
@@ -33,6 +34,7 @@ import {JsonInterceptor} from './core/interceptors/json.interceptor';
     AuthModule,
     SharedModule,
     AppRoutingModule,
+    UserCertificationsModule,
     HttpClientModule,
     StoreModule.forRoot(reducers),
     EffectsModule.forRoot([AuthEffects])
