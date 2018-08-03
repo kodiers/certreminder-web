@@ -12,6 +12,7 @@ import {AuthService} from './auth.service';
 import {AuthRoutingModule} from './auth-routing.module';
 import { PasswordRules } from './validators/password-rules.directive';
 import { ValidateEqual } from './validators/validate-equal.directive';
+import {UserCertificationsRoutingModule} from '../user-certifications/user-certifications.routing.module';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { ValidateEqual } from './validators/validate-equal.directive';
     FormsModule,
     NgbModule,
     SharedModule,
-    AuthRoutingModule
+    AuthRoutingModule,
+    UserCertificationsRoutingModule
   ],
   providers: [AuthService]
 })

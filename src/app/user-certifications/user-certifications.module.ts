@@ -4,6 +4,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import {SharedModule} from '../shared/shared.module';
 import {UserCertificationsRoutingModule} from './user-certifications.routing.module';
+import { UserCertificationListComponent } from './user-certification-list/user-certification-list.component';
 
 
 @NgModule({
@@ -13,6 +14,6 @@ import {UserCertificationsRoutingModule} from './user-certifications.routing.mod
     SharedModule,
     UserCertificationsRoutingModule
   ],
-  declarations: []
+  declarations: [UserCertificationListComponent]
 })
 export class UserCertificationsModule { }
