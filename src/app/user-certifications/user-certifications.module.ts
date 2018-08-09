@@ -5,6 +5,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {SharedModule} from '../shared/shared.module';
 import {UserCertificationsRoutingModule} from './user-certifications.routing.module';
 import { UserCertificationListComponent } from './user-certification-list/user-certification-list.component';
+import { UserCertificationListItemComponent } from './user-certification-list/user-certification-list-item/user-certification-list-item.component';
+import {UserCertificationService} from './services/user-certification.service';
 
 
 @NgModule({
@@ -14,6 +16,12 @@ import { UserCertificationListComponent } from './user-certification-list/user-c
     SharedModule,
     UserCertificationsRoutingModule
   ],
-  declarations: [UserCertificationListComponent]
+  declarations: [
+    UserCertificationListComponent,
+    UserCertificationListItemComponent
+  ],
+  providers: [
+    UserCertificationService
+  ]
 })
 export class UserCertificationsModule { }
