@@ -13,11 +13,10 @@ const initialState: State = {
 
 export function userCertReducer(state = initialState, action: UserCertActions.UserCertActions) {
   switch (action.type) {
-    case (UserCertActions.GET_ALL_USER_CERTS):
+    case (UserCertActions.SET_ALL_USER_CERTS):
       return {
         ...state,
-        userCertifications: action.payload,
-        errorMessage: null
+        userCertifications: action.payload
       };
     case (UserCertActions.GET_ALL_USER_CERTS_FAILED):
       return {

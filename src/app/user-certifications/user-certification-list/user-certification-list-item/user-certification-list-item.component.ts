@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import {UserCertification} from '../../models/user-certification.model';
 
 @Component({
   selector: 'app-user-certification-list-item',
@@ -6,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./user-certification-list-item.component.css']
 })
 export class UserCertificationListItemComponent implements OnInit {
+  @Input() userCert: UserCertification;
 
   constructor() { }
 

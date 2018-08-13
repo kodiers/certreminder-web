@@ -5,6 +5,9 @@
 </div>
 <div class="row">
   <div class="col-sm-4">
-
+    <app-user-certification-list-item
+      *ngFor="let userCertEl of userCertifications"
+      [userCert]="userCertEl">
+    </app-user-certification-list-item>
   </div>
 </div>
