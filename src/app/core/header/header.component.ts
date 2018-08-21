@@ -20,7 +20,6 @@ export class HeaderComponent implements OnInit {
   constructor(private store: Store<fromApp.AppState>) {}
 
   ngOnInit() {
-    this.store.dispatch(new AuthActions.HasValidToken());
     this.authState = this.store.select('auth');
   }
 
