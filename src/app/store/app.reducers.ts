@@ -7,7 +7,7 @@ import {userCertReducer} from '../user-certifications/store/user-certifications.
 
 export interface AppState {
   auth: fromAuth.State,
-  userCerts: fromUserCerts.State
+  userCerts: fromUserCerts.CertState
 }
 
 export const reducers: ActionReducerMap<AppState> = {

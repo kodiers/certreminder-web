@@ -13,14 +13,17 @@ import {UserCertification} from '../models/user-certification.model';
 })
 export class UserCertificationListComponent implements OnInit {
   userCertifications: UserCertification[];
+  errorMessage: string;
 
-  constructor(private store: Store<fromApp.AppState>) { }
+  constructor(private store: Store<fromApp.AppState>) {
+    this.store.dispatch(new fromUserCertActions.GetAllUserCerts());
+  }
 
   ngOnInit() {
-    this.store.dispatch(new fromUserCertActions.GetAllUserCerts());
     this.store.select('userCerts').subscribe(data => {
       if (data) {
         this.userCertifications = data.userCertifications;
+        this.errorMessage = data.errorMessage;
       }
     });
   }

@@ -11,13 +11,18 @@ export class UserCertificationsEffects {
   @Effect() getAllUsersCerts = this.actions$.ofType(userCertActions.GET_ALL_USER_CERTS).switchMap(
     (action: userCertActions.GetAllUserCerts) => {
       return this.userCertSvc.getAllUserCertifications();
-    }).map(data => {
+    }).mergeMap(data => {
       if (data.error === null) {
-        return {
+        return [
+          {
           type: userCertActions.SET_ALL_USER_CERTS,
           payload: data.userCerts
-        };
+        }
+        ];
       }
-      return {type: userCertActions.GET_ALL_USER_CERTS_FAILED, payload: 'Http request failed'}
+      return [
+        {type: userCertActions.GET_ALL_USER_CERTS_FAILED, payload: 'Could not download certifications.'}
+        ];
   });
+
 }

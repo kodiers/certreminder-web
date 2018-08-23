@@ -4,10 +4,16 @@
   </div>
 </div>
 <div class="row">
-  <div class="col-sm-4">
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
+  </div>
+  <div class="col-sm-4" *ngIf="userCertifications">
     <app-user-certification-list-item
       *ngFor="let userCertEl of userCertifications"
       [userCert]="userCertEl">
     </app-user-certification-list-item>
+  </div>
+  <div class="col-sm-4">
+    <router-outlet></router-outlet>
   </div>
 </div>
