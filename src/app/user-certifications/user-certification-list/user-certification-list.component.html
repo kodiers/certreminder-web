@@ -7,10 +7,11 @@
   <div *ngIf="errorMessage" class="alert alert-danger">
     {{ errorMessage }}
   </div>
-  <div class="col-sm-4" *ngIf="userCertifications">
+  <div class="col-sm-4" *ngIf="userCertifications && vendors">
     <app-user-certification-list-item
       *ngFor="let userCertEl of userCertifications"
-      [userCert]="userCertEl">
+      [userCert]="userCertEl"
+      [vendors]="vendors">
     </app-user-certification-list-item>
   </div>
   <div class="col-sm-4">

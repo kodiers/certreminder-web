@@ -23,4 +23,12 @@ export class VendorService {
       return Observable.of(data);
     });
   }
+
+  getVendorById(id: number, vendors: Vendor[]) {
+    const filteredVendors = vendors.filter(vendor => id === vendor.id);
+    if (filteredVendors.length > 0) {
+      return filteredVendors[0];
+    }
+    return null;
+  }
 }
