@@ -10,7 +10,7 @@ import {Vendor} from '../../shared/models/vendor.model';
 @Component({
   selector: 'app-user-certification-list',
   templateUrl: './user-certification-list.component.html',
-  styleUrls: ['./user-certification-list.component.css']
+  styleUrls: ['./user-certification-list.component.scss']
 })
 export class UserCertificationListComponent implements OnInit {
   vendors: Vendor[];

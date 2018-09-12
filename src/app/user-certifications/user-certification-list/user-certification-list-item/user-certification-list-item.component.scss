@@ -1,0 +1,10 @@
+.certification__title--span {
+  font-size: 0.8em;
+}
+.certification__description--a {
+  font-size: 0.7em;
+  color: dimgrey;
+  &:hover {
+    text-decoration: none;
+  }
+}

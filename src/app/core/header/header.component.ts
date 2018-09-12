@@ -11,7 +11,7 @@ import * as AuthActions from '../../auth/store/auth.actions';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
   collapsible: boolean = true;

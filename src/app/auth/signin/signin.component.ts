@@ -10,7 +10,7 @@ import * as fromAuth from '../../auth/store/auth.reducers';
 @Component({
   selector: 'app-signin',
   templateUrl: './signin.component.html',
-  styleUrls: ['./signin.component.css']
+  styleUrls: ['./signin.component.scss']
 })
 export class SigninComponent implements OnInit {
   authState: Observable<fromAuth.State>;
