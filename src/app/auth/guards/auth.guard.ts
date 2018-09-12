@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from '@angular/router';
+import {ActivatedRouteSnapshot, CanActivate, CanActivateChild, Router, RouterStateSnapshot} from '@angular/router';
 
 import {Store} from '@ngrx/store';
 
@@ -8,7 +8,7 @@ import * as fromAuth from '../store/auth.reducers';
 
 
 @Injectable()
-export class AuthGuard implements CanActivate {
+export class AuthGuard implements CanActivate, CanActivateChild {
   constructor(private store: Store<fromApp.AppState>, private router: Router) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
@@ -18,5 +18,9 @@ export class AuthGuard implements CanActivate {
       }
       this.router.navigate(['/signin']);
     });
+  }
+
+  canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+    return this.canActivate(route, state);
   }
 }
