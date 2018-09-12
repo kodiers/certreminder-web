@@ -6,13 +6,15 @@ import {Vendor} from '../../shared/models/vendor.model';
 export interface CertState {
   userCertifications: [UserCertification],
   errorMessage: string,
-  vendors: [Vendor]
+  vendors: [Vendor],
+  choosedUserCertification: UserCertification
 }
 
 const initialCertState: CertState = {
   userCertifications: null,
   errorMessage: null,
-  vendors: null
+  vendors: null,
+  choosedUserCertification: null
 };
 
 export function userCertReducer(state = initialCertState, action: UserCertActions.UserCertActions) {
@@ -39,6 +41,11 @@ export function userCertReducer(state = initialCertState, action: UserCertAction
         ...state,
         vendors: null,
         errorMessage: action.payload
+      };
+    case (UserCertActions.CHOOSE_USER_CERTIFICATION):
+      return {
+        ...state,
+        choosedUserCertification: action.payload
       }
   }
 }

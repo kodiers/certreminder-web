@@ -6,12 +6,13 @@ import {VendorService} from '../../services/vendor.service';
 @Component({
   selector: 'app-user-certification-list-item',
   templateUrl: './user-certification-list-item.component.html',
-  styleUrls: ['./user-certification-list-item.component.css']
+  styleUrls: ['./user-certification-list-item.component.scss']
 })
 export class UserCertificationListItemComponent implements OnInit {
   @Input() userCert: UserCertification;
   @Input() vendors: Vendor[];
   vendor: Vendor;
+  isCollapsed = true;
 
   constructor(private vendorSvc: VendorService) { }
 

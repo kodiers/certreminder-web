@@ -8,3 +8,18 @@
     text-decoration: none;
   }
 }
+.certification__title--a {
+  color: #212529;;
+  &:hover {
+    text-decoration: none;
+  }
+}
+.certification__description--span {
+  font-size: 0.8em;
+  color: dimgrey;
+  border-top: 1px solid gray;
+  display: inline-block;
+}
+.active-link {
+  border-color: #857777;
+}

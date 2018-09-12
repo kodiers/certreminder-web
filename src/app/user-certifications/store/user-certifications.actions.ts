@@ -8,6 +8,7 @@ export const SET_ALL_USER_CERTS = 'SET_ALL_USER_CERTS';
 export const GET_ALL_VENDORS = 'GET_ALL_VENDORS';
 export const GET_ALL_VENDORS_FAILED = 'GET_ALL_VENDORS_FAILED';
 export const SET_ALL_VENDORS = 'SET_ALL_VENDORS';
+export const CHOOSE_USER_CERTIFICATION = 'CHOOSE_USER_CERTIFICATION';
 
 export class GetAllUserCerts implements Action {
   readonly type = GET_ALL_USER_CERTS;
@@ -41,5 +42,11 @@ export class SetAllVendors implements Action {
   constructor (public payload: [Vendor]) {}
 }
 
+export class ChooseUserCertification implements Action {
+  readonly type = CHOOSE_USER_CERTIFICATION;
+
+  constructor (public payload: UserCertification) {}
+}
+
 export type UserCertActions = GetAllUserCerts | GetAllUserCertsFailed | SetAllUserCerts | GetAllVendors
-  | GetAllVendorsFailed | SetAllVendors;
+  | GetAllVendorsFailed | SetAllVendors | ChooseUserCertification;

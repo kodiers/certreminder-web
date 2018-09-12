@@ -8,11 +8,13 @@
     {{ errorMessage }}
   </div>
   <div class="col-sm-4" *ngIf="userCertifications && vendors">
-    <app-user-certification-list-item
-      *ngFor="let userCertEl of userCertifications"
-      [userCert]="userCertEl"
-      [vendors]="vendors">
-    </app-user-certification-list-item>
+    <ul class="list-group">
+      <app-user-certification-list-item
+        *ngFor="let userCertEl of userCertifications"
+        [userCert]="userCertEl"
+        [vendors]="vendors">
+      </app-user-certification-list-item>
+    </ul>
   </div>
   <div class="col-sm-4">
     <router-outlet></router-outlet>
