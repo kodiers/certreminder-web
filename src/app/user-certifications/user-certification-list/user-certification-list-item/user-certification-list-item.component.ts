@@ -1,4 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
+
+import {Store} from '@ngrx/store';
+
+import * as fromApp from '../../../store/app.reducers';
+import * as fromUserCertActions from '../../store/user-certifications.actions';
 import {UserCertification} from '../../models/user-certification.model';
 import {Vendor} from '../../../shared/models/vendor.model';
 import {VendorService} from '../../services/vendor.service';
@@ -14,12 +19,18 @@ export class UserCertificationListItemComponent implements OnInit {
   vendor: Vendor;
   isCollapsed = true;
 
-  constructor(private vendorSvc: VendorService) { }
+  constructor(private vendorSvc: VendorService,
+              private store: Store<fromApp.AppState>)
+  { }
 
   ngOnInit() {
     if (this.userCert && this.vendors) {
       this.vendor = this.vendorSvc.getVendorById(this.userCert.certification.vendor, this.vendors);
     }
+  }
+
+  onSelect() {
+    this.store.dispatch(new fromUserCertActions.ChooseUserCertification(this.userCert));
   }
 
 }

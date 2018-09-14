@@ -46,6 +46,8 @@ export function userCertReducer(state = initialCertState, action: UserCertAction
       return {
         ...state,
         choosedUserCertification: action.payload
-      }
+      };
+    default:
+      return state;
   }
 }

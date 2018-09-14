@@ -6,7 +6,7 @@
   </div>
   <div class="row">
     <div class="col-sm-12">
-      <a [routerLink]="userCert.id" class="certification__title--a">{{ userCert.certification.title }}</a>
+      <a [routerLink]="userCert.id" class="certification__title&#45;&#45;a" (click)="onSelect()">{{ userCert.certification.title }}</a>
       <br>
       <a
         (click)="isCollapsed = !isCollapsed"

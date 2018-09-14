@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 
 import {API_URL} from '../../shared/constants';
 import {UserCertification} from '../models/user-certification.model';
+import {Vendor} from '../../shared/models/vendor.model';
 
 @Injectable({
   providedIn: 'root'
@@ -22,5 +23,13 @@ export class UserCertificationService {
       const data = {userCerts: null, error: err};
       return Observable.of(data);
     });
+  }
+
+  getUserCertificationById(id: number, userCerts: UserCertification[]) {
+    const filteredCerts = userCerts.filter(userCert => id === userCert.id);
+    if (filteredCerts.length > 0) {
+      return filteredCerts[0];
+    }
+    return null;
   }
 }
