@@ -32,4 +32,11 @@ export class UserCertificationService {
     }
     return null;
   }
+
+  getUserCertification(id: number) {
+    let url = this.USER_CERT_LIST_URL + `${id}/`;
+    return this.httpClient.get(url).map((response: UserCertification) => response).catch(err => {
+      return Observable.of(err);
+    });
+  }
 }
