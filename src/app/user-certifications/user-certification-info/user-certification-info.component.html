@@ -1,3 +1,20 @@
-<p>
-  user-certification-info works!
-</p>
+<div *ngIf="userCert">
+  <div class="row">
+    <div class="col-sm-12 text-center">
+      <h3>{{ userCert.certification?.title }}</h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-6">
+      <span>{{ vendor?.title }}</span>
+    </div>
+    <div class="col-sm-6">
+      <span>{{userCert.expiration_date|date:'y-MM-d'}}</span>
+    </div>
+  </div>
+  <div class="row" *ngIf="userCert.certification && userCert.certification.description">
+    <div class="col-sm-12">
+      <p>{{ userCert.certification.description }}</p>
+    </div>
+  </div>
+</div>
