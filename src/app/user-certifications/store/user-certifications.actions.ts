@@ -1,6 +1,7 @@
 import {Action} from '@ngrx/store';
 import {UserCertification} from '../models/user-certification.model';
 import {Vendor} from '../../shared/models/vendor.model';
+import {UserExam} from '../models/user-exam.model';
 
 export const GET_ALL_USER_CERTS = 'GET_ALL_USER_CERTS';
 export const GET_ALL_USER_CERTS_FAILED = 'GET_ALL_USER_CERTS_FAILED';
@@ -9,6 +10,9 @@ export const GET_ALL_VENDORS = 'GET_ALL_VENDORS';
 export const GET_ALL_VENDORS_FAILED = 'GET_ALL_VENDORS_FAILED';
 export const SET_ALL_VENDORS = 'SET_ALL_VENDORS';
 export const CHOOSE_USER_CERTIFICATION = 'CHOOSE_USER_CERTIFICATION';
+export const GET_CHOOSED_USER_CERT_EXAMS = 'GET_CHOOSED_USER_CERT_EXAMS';
+export const GET_CHOOSED_USER_CERT_EXAMS_FAILED = 'GET_CHOOSED_USER_CERT_EXAMS_FAILED';
+export const SET_CHOOSED_USER_CERT_EXAMS = 'SET_CHOOSED_USER_CERT_EXAMS';
 
 export class GetAllUserCerts implements Action {
   readonly type = GET_ALL_USER_CERTS;
@@ -39,7 +43,7 @@ export class GetAllVendorsFailed implements Action {
 export class SetAllVendors implements Action {
   readonly type = SET_ALL_VENDORS;
 
-  constructor (public payload: [Vendor]) {}
+  constructor (public payload: Vendor[]) {}
 }
 
 export class ChooseUserCertification implements Action {
@@ -48,5 +52,22 @@ export class ChooseUserCertification implements Action {
   constructor (public payload: UserCertification) {}
 }
 
+export class GetChoosedUserCertExams implements Action {
+  readonly type = GET_CHOOSED_USER_CERT_EXAMS;
+}
+
+export class GetChoosedUserCertExamsFailed implements Action {
+  readonly type = GET_CHOOSED_USER_CERT_EXAMS_FAILED;
+
+  constructor(public payload: string) {}
+}
+
+export class SetChoosedUserCertExams implements Action {
+  readonly type = SET_CHOOSED_USER_CERT_EXAMS;
+
+  constructor(public payload: UserExam[]) {}
+}
+
 export type UserCertActions = GetAllUserCerts | GetAllUserCertsFailed | SetAllUserCerts | GetAllVendors
-  | GetAllVendorsFailed | SetAllVendors | ChooseUserCertification;
+  | GetAllVendorsFailed | SetAllVendors | ChooseUserCertification | GetChoosedUserCertExams
+  | GetChoosedUserCertExamsFailed | SetChoosedUserCertExams;

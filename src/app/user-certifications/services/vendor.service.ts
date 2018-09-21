@@ -16,7 +16,7 @@ export class VendorService {
 
   getAllVendors() {
     return this.httpClient.get(this.VENDOR_API_URL).map((response: any) => {
-      const vendors: [Vendor] = response.results;
+      const vendors: Vendor[] = response.results;
       return {vendors: vendors, error: null};
     }).catch( err => {
       const data = {vendors: null, error: err };
