@@ -11,6 +11,7 @@ import { UserCertificationListItemComponent } from './user-certification-list/us
 import {UserCertificationService} from './services/user-certification.service';
 import {UserCertificationsEffects} from './store/user-certifications.effects';
 import { UserCertificationInfoComponent } from './user-certification-info/user-certification-info.component';
+import { UserCertificationExamComponent } from './user-certification-info/user-certification-exam/user-certification-exam.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { UserCertificationInfoComponent } from './user-certification-info/user-c
   declarations: [
     UserCertificationListComponent,
     UserCertificationListItemComponent,
-    UserCertificationInfoComponent
+    UserCertificationInfoComponent,
+    UserCertificationExamComponent
   ],
   providers: [
     UserCertificationService

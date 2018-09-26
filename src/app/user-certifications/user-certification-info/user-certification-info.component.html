@@ -17,4 +17,7 @@
       <p>{{ userCert.certification.description }}</p>
     </div>
   </div>
+  <div class="row" *ngIf="userExams.length > 0">
+    <app-user-certification-exam [userExam]="exam" *ngFor="let exam of userExams"></app-user-certification-exam>
+  </div>
 </div>

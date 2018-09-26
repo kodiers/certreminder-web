@@ -10,6 +10,8 @@ import {UserCertificationService} from '../services/user-certification.service';
 import * as fromUserCertActions from '../store/user-certifications.actions';
 import {Vendor} from '../../shared/models/vendor.model';
 import {VendorService} from '../services/vendor.service';
+import {UserExamService} from '../services/user-exam.service';
+import {UserExam} from '../models/user-exam.model';
 
 @Component({
   selector: 'app-user-certification-info',
@@ -20,12 +22,14 @@ export class UserCertificationInfoComponent implements OnInit {
   userCert: UserCertification;
   vendor: Vendor;
   routeSubscription: Subscription;
+  userExams: UserExam[] = [];
 
   constructor(
     private store: Store<fromApp.AppState>,
     private activatedRoute: ActivatedRoute,
     private userCertSvc: UserCertificationService,
-    private vendorSvc: VendorService) { }
+    private vendorSvc: VendorService,
+    private userExamSvc: UserExamService) { }
 
   ngOnInit() {
     this.store.select('userCerts').subscribe(data => {
@@ -49,10 +53,15 @@ export class UserCertificationInfoComponent implements OnInit {
   }
 
   setUserCertAndVendor(cert: UserCertification, vendors: Vendor[]) {
+    // TODO: remove multiple dispatch action call
     this.userCert = cert;
     if (vendors) {
       this.vendor = this.vendorSvc.getVendorById(this.userCert.certification.vendor, vendors);
     }
+    this.userExamSvc.getUserExamsForUserCertification(this.userCert.id).take(1).subscribe((userExams: UserExam[]) => {
+      this.userExams = userExams;
+      this.store.dispatch(new fromUserCertActions.SetChoosedUserCertExams(this.userExams));
+    });
   }
 
 }
