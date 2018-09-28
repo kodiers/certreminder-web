@@ -7,6 +7,8 @@ import * as fromUserCertActions from '../../store/user-certifications.actions';
 import {UserCertification} from '../../models/user-certification.model';
 import {Vendor} from '../../../shared/models/vendor.model';
 import {VendorService} from '../../services/vendor.service';
+import {UserExam} from '../../models/user-exam.model';
+import {UserExamService} from '../../services/user-exam.service';
 
 @Component({
   selector: 'app-user-certification-list-item',
@@ -20,6 +22,7 @@ export class UserCertificationListItemComponent implements OnInit {
   isCollapsed = true;
 
   constructor(private vendorSvc: VendorService,
+              private userExamSvc: UserExamService,
               private store: Store<fromApp.AppState>)
   { }
 
@@ -31,6 +34,9 @@ export class UserCertificationListItemComponent implements OnInit {
 
   onSelect() {
     this.store.dispatch(new fromUserCertActions.ChooseUserCertification(this.userCert));
+    this.userExamSvc.getUserExamsForUserCertification(this.userCert.id).take(1).subscribe((userExams: UserExam[]) => {
+      this.store.dispatch(new fromUserCertActions.SetChoosedUserCertExams(userExams));
+    });
   }
 
 }

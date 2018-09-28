@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 
 import {Store} from '@ngrx/store';
 import {Subscription} from 'rxjs';
@@ -18,11 +18,12 @@ import {UserExam} from '../models/user-exam.model';
   templateUrl: './user-certification-info.component.html',
   styleUrls: ['./user-certification-info.component.scss']
 })
-export class UserCertificationInfoComponent implements OnInit {
+export class UserCertificationInfoComponent implements OnInit, OnDestroy {
   userCert: UserCertification;
   vendor: Vendor;
   routeSubscription: Subscription;
   userExams: UserExam[] = [];
+  storeSubscription: Subscription;
 
   constructor(
     private store: Store<fromApp.AppState>,
@@ -32,13 +33,14 @@ export class UserCertificationInfoComponent implements OnInit {
     private userExamSvc: UserExamService) { }
 
   ngOnInit() {
-    this.store.select('userCerts').subscribe(data => {
+    this.storeSubscription = this.store.select('userCerts').subscribe(data => {
       if (data.choosedUserCertification) {
         this.setUserCertAndVendor(data.choosedUserCertification, data.vendors);
         // Cancel route subscription for prevent double request from server if it was previously requested
         if (this.routeSubscription) {
           this.routeSubscription.unsubscribe();
         }
+        this.userExams = data.choosedUserCertExams;
       } else {
         // If state doesn't have choosedSubscription - get it from server using route param
         // TODO: this code emit store.select twice - need to fix
@@ -47,21 +49,24 @@ export class UserCertificationInfoComponent implements OnInit {
         }).subscribe(userCert => {
           this.setUserCertAndVendor(userCert, data.vendors);
           this.store.dispatch(new fromUserCertActions.ChooseUserCertification(this.userCert));
+          this.userExamSvc.getUserExamsForUserCertification(this.userCert.id).take(1).subscribe((userExams: UserExam[]) => {
+            this.userExams = userExams;
+            this.store.dispatch(new fromUserCertActions.SetChoosedUserCertExams(this.userExams));
+          });
         });
       }
     });
   }
 
+  ngOnDestroy() {
+    this.storeSubscription.unsubscribe();
+  }
+
   setUserCertAndVendor(cert: UserCertification, vendors: Vendor[]) {
-    // TODO: remove multiple dispatch action call
     this.userCert = cert;
     if (vendors) {
       this.vendor = this.vendorSvc.getVendorById(this.userCert.certification.vendor, vendors);
     }
-    this.userExamSvc.getUserExamsForUserCertification(this.userCert.id).take(1).subscribe((userExams: UserExam[]) => {
-      this.userExams = userExams;
-      this.store.dispatch(new fromUserCertActions.SetChoosedUserCertExams(this.userExams));
-    });
   }
 
 }
