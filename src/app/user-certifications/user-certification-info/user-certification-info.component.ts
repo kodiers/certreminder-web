@@ -2,6 +2,8 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 
 import {Store} from '@ngrx/store';
 import {Subscription} from 'rxjs';
+import {faCalendarAlt} from '@fortawesome/free-solid-svg-icons';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 import * as fromApp from '../../store/app.reducers';
 import {UserCertification} from '../models/user-certification.model';
@@ -12,7 +14,6 @@ import {Vendor} from '../../shared/models/vendor.model';
 import {VendorService} from '../services/vendor.service';
 import {UserExamService} from '../services/user-exam.service';
 import {UserExam} from '../models/user-exam.model';
-import {NgbModal, NgbModalOptions} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-user-certification-info',
@@ -25,6 +26,8 @@ export class UserCertificationInfoComponent implements OnInit, OnDestroy {
   routeSubscription: Subscription;
   userExams: UserExam[] = [];
   storeSubscription: Subscription;
+  faCalendar = faCalendarAlt;
+  choosedCertDate = null;
 
   constructor(
     private store: Store<fromApp.AppState>,
@@ -32,7 +35,7 @@ export class UserCertificationInfoComponent implements OnInit, OnDestroy {
     private userCertSvc: UserCertificationService,
     private vendorSvc: VendorService,
     private userExamSvc: UserExamService,
-    private modalService: NgbModal) { }
+    private modalSvc: NgbModal) { }
 
   ngOnInit() {
     this.storeSubscription = this.store.select('userCerts').subscribe(data => {
@@ -71,8 +74,20 @@ export class UserCertificationInfoComponent implements OnInit, OnDestroy {
     }
   }
 
+  onCertDateSelect(event) {
+    this.choosedCertDate = event;
+  }
+
   openDateModal(content) {
-    this.modalService.open(content);
+    this.modalSvc.open(content).result.then((result) => {
+      if (this.choosedCertDate) {
+        // TODO: send query to update certification date
+        console.log(this.choosedCertDate);
+      }
+      this.choosedCertDate = null;
+    }, (reason) => {
+      this.choosedCertDate = null;
+    });
   }
 
 }

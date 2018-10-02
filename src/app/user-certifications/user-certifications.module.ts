@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {EffectsModule} from '@ngrx/effects';
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 
 import {SharedModule} from '../shared/shared.module';
 import {UserCertificationsRoutingModule} from './user-certifications.routing.module';
@@ -20,7 +21,8 @@ import { UserCertificationExamComponent } from './user-certification-info/user-c
     NgbModule,
     SharedModule,
     UserCertificationsRoutingModule,
-    EffectsModule.forFeature([UserCertificationsEffects])
+    EffectsModule.forFeature([UserCertificationsEffects]),
+    FontAwesomeModule
   ],
   declarations: [
     UserCertificationListComponent,

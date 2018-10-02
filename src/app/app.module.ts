@@ -7,6 +7,7 @@ import {StoreModule} from '@ngrx/store';
 import {EffectsModule} from '@ngrx/effects';
 import {StoreRouterConnectingModule} from '@ngrx/router-store';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 
 import {environment} from '../environments/environment';
 
@@ -35,6 +36,7 @@ import {JsonInterceptor} from './core/interceptors/json.interceptor';
   imports: [
     BrowserModule,
     NgbModule.forRoot(),
+    FontAwesomeModule,
     AuthModule,
     SharedModule,
     AppRoutingModule,

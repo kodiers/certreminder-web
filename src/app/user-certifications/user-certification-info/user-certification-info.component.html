@@ -1,7 +1,7 @@
-<ng-template #choose_cert_date let-modal="openDateModal">
+<ng-template #choose_cert_date let-close="close" let-dismiss="dismiss">
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">Choose certification expire date:</h4>
-    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+    <button type="button" class="close" aria-label="Close" (click)="dismiss()">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
@@ -10,18 +10,19 @@
       <div class="form-group">
         <label for="dateOfBirth">Certification expire date:</label>
         <div class="input-group">
-          <input id="dateOfBirth" class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #dp="ngbDatepicker">
+          <input id="dateOfBirth" class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #dp="ngbDatepicker" (dateSelect)="onCertDateSelect($event)">
           <div class="input-group-append">
-            <button class="btn btn-outline-secondary calendar" (click)="dp.toggle()" type="button"></button>
+            <button class="btn btn-outline-secondary calendar" (click)="dp.toggle()" type="button"><fa-icon [icon]="faCalendar"></fa-icon></button>
           </div>
         </div>
       </div>
     </form>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+    <button type="button" class="btn btn-outline-dark" (click)="close()">Save</button>
   </div>
 </ng-template>
+
 <div *ngIf="userCert">
   <div class="row">
     <div class="col-sm-12 text-left">
@@ -42,7 +43,7 @@
       <p>{{ userCert.certification.description }}</p>
     </div>
   </div>
-  <div class="row" *ngIf="userExams.length > 0">
+  <div class="row" *ngIf="userExams?.length > 0">
     <app-user-certification-exam [userExam]="exam" *ngFor="let exam of userExams"></app-user-certification-exam>
   </div>
 </div>
