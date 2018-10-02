@@ -1,15 +1,40 @@
+<ng-template #choose_cert_date let-modal="openDateModal">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Choose certification expire date:</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+        <label for="dateOfBirth">Certification expire date:</label>
+        <div class="input-group">
+          <input id="dateOfBirth" class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #dp="ngbDatepicker">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary calendar" (click)="dp.toggle()" type="button"></button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+  </div>
+</ng-template>
 <div *ngIf="userCert">
   <div class="row">
-    <div class="col-sm-12 text-center">
+    <div class="col-sm-12 text-left">
       <h3>{{ userCert.certification?.title }}</h3>
     </div>
   </div>
   <div class="row">
     <div class="col-sm-6">
-      <span>{{ vendor?.title }}</span>
+      <span class="usi__vendor--span">{{ vendor?.title }}</span>
     </div>
     <div class="col-sm-6">
-      <span>{{userCert.expiration_date|date:'y-MM-d'}}</span>
+      <span class="usi__vendor--span">{{userCert.expiration_date|date:'y-MM-d'}}</span>
+      <button class="btn btn-link btn-sm" (click)="openDateModal(choose_cert_date)">Edit</button>
     </div>
   </div>
   <div class="row" *ngIf="userCert.certification && userCert.certification.description">

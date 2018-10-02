@@ -12,6 +12,7 @@ import {Vendor} from '../../shared/models/vendor.model';
 import {VendorService} from '../services/vendor.service';
 import {UserExamService} from '../services/user-exam.service';
 import {UserExam} from '../models/user-exam.model';
+import {NgbModal, NgbModalOptions} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-user-certification-info',
@@ -30,7 +31,8 @@ export class UserCertificationInfoComponent implements OnInit, OnDestroy {
     private activatedRoute: ActivatedRoute,
     private userCertSvc: UserCertificationService,
     private vendorSvc: VendorService,
-    private userExamSvc: UserExamService) { }
+    private userExamSvc: UserExamService,
+    private modalService: NgbModal) { }
 
   ngOnInit() {
     this.storeSubscription = this.store.select('userCerts').subscribe(data => {
@@ -67,6 +69,10 @@ export class UserCertificationInfoComponent implements OnInit, OnDestroy {
     if (vendors) {
       this.vendor = this.vendorSvc.getVendorById(this.userCert.certification.vendor, vendors);
     }
+  }
+
+  openDateModal(content) {
+    this.modalService.open(content);
   }
 
 }
