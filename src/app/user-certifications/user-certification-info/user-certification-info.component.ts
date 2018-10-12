@@ -28,6 +28,7 @@ export class UserCertificationInfoComponent implements OnInit, OnDestroy {
   storeSubscription: Subscription;
   faCalendar = faCalendarAlt;
   choosedCertDate = null;
+  errorMessage = null;
 
   constructor(
     private store: Store<fromApp.AppState>,
@@ -79,15 +80,30 @@ export class UserCertificationInfoComponent implements OnInit, OnDestroy {
   }
 
   openDateModal(content) {
+    this.errorMessage = null;
     this.modalSvc.open(content).result.then((result) => {
       if (this.choosedCertDate) {
-        // TODO: send query to update certification date
-        console.log(this.choosedCertDate);
+        this.userCert.expiration_date = new Date(this.choosedCertDate.year, this.choosedCertDate.month - 1, this.choosedCertDate.day);
+        this.userCertSvc.updateUserCertification(this.userCert).subscribe(
+          (response: UserCertification) => {
+            this.store.dispatch(new fromUserCertActions.ChooseUserCertification(response));
+          },
+          (err)=> {
+            this.errorMessage = 'Could not update user certification';
+          }
+          );
       }
       this.choosedCertDate = null;
     }, (reason) => {
       this.choosedCertDate = null;
     });
+  }
+
+  deleteUserCert() {
+    // TODO: may be need refactor this to actions
+    this.userCertSvc.deleteUserCertification(this.userCert).subscribe(()=>{
+      this.store.dispatch(new fromUserCertActions.ChooseUserCertification(null));
+    }, (err) => {});
   }
 
 }

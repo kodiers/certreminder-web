@@ -25,18 +25,30 @@
 
 <div *ngIf="userCert">
   <div class="row">
-    <div class="col-sm-12 text-left">
-      <h3>{{ userCert.certification?.title }}</h3>
+    <div class="col-sm-9 text-left">
+      <div class="row">
+        <div class="col-sm-12">
+          <h3>{{ userCert.certification?.title }}</h3>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <span class="usi__vendor--span">{{ vendor?.title }}</span>
+        </div>
+        <div class="col-sm-6">
+          <span class="usi__vendor--span">{{userCert.expiration_date|date:'y-MM-d'}}</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-3 text-left">
+      <button class="btn btn-outline-primary" (click)="openDateModal(choose_cert_date)">Edit</button>
+      <button class="btn btn-outline-danger usi__btn" (click)="deleteUserCert()">Delete</button>
     </div>
   </div>
+  <div class="alert alert-danger" *ngIf="errorMessage">
+    {{errorMessage}}
+  </div>
   <div class="row">
-    <div class="col-sm-6">
-      <span class="usi__vendor--span">{{ vendor?.title }}</span>
-    </div>
-    <div class="col-sm-6">
-      <span class="usi__vendor--span">{{userCert.expiration_date|date:'y-MM-d'}}</span>
-      <button class="btn btn-link btn-sm" (click)="openDateModal(choose_cert_date)">Edit</button>
-    </div>
   </div>
   <div class="row" *ngIf="userCert.certification && userCert.certification.description">
     <div class="col-sm-12">

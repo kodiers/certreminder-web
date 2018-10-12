@@ -4,7 +4,7 @@ import {Observable} from 'rxjs';
 
 import {API_URL} from '../../shared/constants';
 import {UserCertification} from '../models/user-certification.model';
-import {Vendor} from '../../shared/models/vendor.model';
+import {formatDateToStr} from '../../shared/helpers/functions';
 
 @Injectable({
   providedIn: 'root'
@@ -38,5 +38,17 @@ export class UserCertificationService {
     return this.httpClient.get(url).map((response: UserCertification) => response).catch(err => {
       return Observable.of(err);
     });
+  }
+
+  updateUserCertification(userCert: UserCertification) {
+    let url = this.USER_CERT_LIST_URL + `${userCert.id}/`;
+    let expDate = formatDateToStr(userCert.expiration_date);
+    let data = {'certification_id': userCert.certification.id, 'expiration_date': expDate, 'remind_at_date': null};
+    return this.httpClient.patch(url, data);
+  }
+
+  deleteUserCertification(userCert: UserCertification) {
+    let url = this.USER_CERT_LIST_URL + `${userCert.id}/`;
+    return this.httpClient.delete(url);
   }
 }
