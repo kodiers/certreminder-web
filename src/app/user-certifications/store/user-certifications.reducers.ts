@@ -60,6 +60,17 @@ export function userCertReducer(state = initialCertState, action: UserCertAction
         ...state,
         choosedUserCertExams: action.payload
       };
+    case (UserCertActions.DELETE_USER_CERT):
+      const userCerts = state.userCertifications;
+      const certToDeleteIndex = userCerts.indexOf(action.payload);
+      if (certToDeleteIndex !== -1) {
+        userCerts.splice(certToDeleteIndex, 1);
+      }
+      return {
+        ...state,
+        choosedUserCertification: null,
+        userCertifications: userCerts
+      };
     default:
       return state;
   }

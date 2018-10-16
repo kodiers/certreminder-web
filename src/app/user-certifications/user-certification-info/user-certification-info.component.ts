@@ -1,4 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 
 import {Store} from '@ngrx/store';
 import {Subscription} from 'rxjs';
@@ -7,7 +8,6 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 import * as fromApp from '../../store/app.reducers';
 import {UserCertification} from '../models/user-certification.model';
-import {ActivatedRoute} from '@angular/router';
 import {UserCertificationService} from '../services/user-certification.service';
 import * as fromUserCertActions from '../store/user-certifications.actions';
 import {Vendor} from '../../shared/models/vendor.model';
@@ -59,7 +59,7 @@ export class UserCertificationInfoComponent implements OnInit, OnDestroy {
             this.userExams = userExams;
             this.store.dispatch(new fromUserCertActions.SetChoosedUserCertExams(this.userExams));
           });
-        });
+        }, (err) => {});
       }
     });
   }
@@ -100,10 +100,11 @@ export class UserCertificationInfoComponent implements OnInit, OnDestroy {
   }
 
   deleteUserCert() {
-    // TODO: may be need refactor this to actions
     this.userCertSvc.deleteUserCertification(this.userCert).subscribe(()=>{
-      this.store.dispatch(new fromUserCertActions.ChooseUserCertification(null));
-    }, (err) => {});
+      this.store.dispatch(new fromUserCertActions.TryDeleteUserCert(this.userCert));
+    }, (err) => {
+      this.errorMessage = 'Could not delete user certification';
+    });
   }
 
 }

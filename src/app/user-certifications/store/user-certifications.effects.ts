@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Effect, Actions} from '@ngrx/effects';
+import {Router} from '@angular/router';
 
 import * as userCertActions from './user-certifications.actions';
 import {UserCertificationService} from '../services/user-certification.service';
@@ -9,7 +10,8 @@ import {VendorService} from '../services/vendor.service';
 export class UserCertificationsEffects {
   constructor(private actions$: Actions,
               private userCertSvc: UserCertificationService,
-              private vendorSvc: VendorService) {}
+              private vendorSvc: VendorService,
+              private router: Router) {}
 
   @Effect() getAllUsersCerts = this.actions$.ofType(userCertActions.GET_ALL_USER_CERTS).switchMap(
     (action: userCertActions.GetAllUserCerts) => {
@@ -46,5 +48,17 @@ export class UserCertificationsEffects {
           payload: 'Could not download vendors.'}
         ];
     });
+
+  @Effect() tryDeleteUserCert = this.actions$.ofType(userCertActions.TRY_DELETE_USER_CERT).map((action: userCertActions.TryDeleteUserCert) => {
+    return action.payload;
+  }).mergeMap((data) => {
+    this.router.navigate(['/user-certifications']);
+    return [
+      {
+        type: userCertActions.DELETE_USER_CERT,
+        payload: data
+      }
+    ];
+  });
 
 }
