@@ -22,4 +22,12 @@ export class UserExamService {
       return response.results;
     });
   }
+
+  deleteUserExam(userExamId: number) {
+    /*
+    Delete user exam by Id
+     */
+    let url = this.USER_EXAMS_API_URL + `${userExamId}/`;
+    return this.httpClient.delete(url);
+  }
 }

@@ -15,6 +15,7 @@ export const GET_CHOOSED_USER_CERT_EXAMS_FAILED = 'GET_CHOOSED_USER_CERT_EXAMS_F
 export const SET_CHOOSED_USER_CERT_EXAMS = 'SET_CHOOSED_USER_CERT_EXAMS';
 export const TRY_DELETE_USER_CERT = 'TRY_DELETE_USER_CERT';
 export const DELETE_USER_CERT = 'DELETE_USER_CERT';
+export const DELETE_USER_CERT_EXAM = 'DELETE_USER_CERT_EXAM';
 
 export class GetAllUserCerts implements Action {
   readonly type = GET_ALL_USER_CERTS;
@@ -23,7 +24,7 @@ export class GetAllUserCerts implements Action {
 export class SetAllUserCerts implements Action {
   readonly type = SET_ALL_USER_CERTS;
 
-  constructor(public payload: [UserCertification]) {}
+  constructor(public payload: UserCertification[]) {}
 }
 
 export class GetAllUserCertsFailed implements Action {
@@ -82,6 +83,12 @@ export class TryDeleteUserCert implements Action {
   constructor(public payload: UserCertification) {}
 }
 
+export class DeleteUserCertExam implements Action {
+  readonly type = DELETE_USER_CERT_EXAM;
+
+  constructor(public payload: UserExam) {}
+}
+
 export type UserCertActions = GetAllUserCerts | GetAllUserCertsFailed | SetAllUserCerts | GetAllVendors
   | GetAllVendorsFailed | SetAllVendors | ChooseUserCertification | GetChoosedUserCertExams
-  | GetChoosedUserCertExamsFailed | SetChoosedUserCertExams | DeleteUserCert | TryDeleteUserCert;
+  | GetChoosedUserCertExamsFailed | SetChoosedUserCertExams | DeleteUserCert | TryDeleteUserCert | DeleteUserCertExam;
