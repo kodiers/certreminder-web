@@ -53,11 +53,9 @@ export class AuthEffects {
     this.router.navigate(['/']);
   });
 
-  @Effect() hasValidToken = this.actions$.ofType(fromAuthActions.HAS_VALID_TOKEN).map(() => {
-    return this.authSvc.getToken();
-  }).switchMap((token: string) => {
+  @Effect() hasValidToken = this.actions$.ofType(fromAuthActions.HAS_VALID_TOKEN).switchMap(() => {
     return this.authSvc.verifyToken();
-  }).mergeMap(data => {
+  }).mergeMap((data: {token:string, error: any }) => {
     if (data.error === null) {
       return [
         {

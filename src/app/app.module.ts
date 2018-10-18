@@ -4,11 +4,17 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {StoreModule} from '@ngrx/store';
+import {EffectsModule} from '@ngrx/effects';
+import {StoreRouterConnectingModule} from '@ngrx/router-store';
+import {StoreDevtoolsModule} from '@ngrx/store-devtools';
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+
+import {environment} from '../environments/environment';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AuthModule} from './auth/auth.module';
 import {SharedModule} from './shared/shared.module';
-import {EffectsModule} from '@ngrx/effects';
+import {UserCertificationsModule} from './user-certifications/user-certifications.module';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './core/header/header.component';
@@ -30,12 +36,16 @@ import {JsonInterceptor} from './core/interceptors/json.interceptor';
   imports: [
     BrowserModule,
     NgbModule.forRoot(),
+    FontAwesomeModule,
     AuthModule,
     SharedModule,
     AppRoutingModule,
+    UserCertificationsModule,
     HttpClientModule,
     StoreModule.forRoot(reducers),
-    EffectsModule.forRoot([AuthEffects])
+    EffectsModule.forRoot([AuthEffects]),
+    StoreRouterConnectingModule,
+    !environment.production ? StoreDevtoolsModule.instrument() : []
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: JsonInterceptor, multi: true},

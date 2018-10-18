@@ -1,0 +1,41 @@
+<div *ngIf="userCert">
+  <div class="row">
+    <div class="col-sm-9 text-left">
+      <div class="row">
+        <div class="col-sm-12">
+          <h3>{{ userCert.certification?.title }}</h3>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <span class="usi__vendor--span">{{ vendor?.title }}</span>
+        </div>
+        <div class="col-sm-6">
+          <span class="usi__vendor--span">{{userCert.expiration_date|date:'y-MM-d'}}</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-3 text-left">
+      <button class="btn btn-outline-primary" (click)="openDateModal()">Edit</button>
+      <button class="btn btn-outline-danger usi__btn" (click)="deleteUserCert()">Delete</button>
+    </div>
+  </div>
+  <div class="alert alert-danger" *ngIf="errorMessage">
+    {{errorMessage}}
+  </div>
+  <div class="row">
+  </div>
+  <div class="row" *ngIf="userCert.certification && userCert.certification.description">
+    <div class="col-sm-12">
+      <p>{{ userCert.certification.description }}</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <button class="btn btn-outline-success ucl__add">Add exam</button>
+    </div>
+  </div>
+  <div class="row uci__exams" *ngIf="userExams?.length > 0">
+    <app-user-certification-exam [userExam]="exam" *ngFor="let exam of userExams"></app-user-certification-exam>
+  </div>
+</div>

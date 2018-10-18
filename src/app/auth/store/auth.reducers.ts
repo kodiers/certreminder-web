@@ -8,15 +8,19 @@ export interface State {
   errorMessage: any;
 }
 
-const initialState: State = {
-  token: null,
-  authenticated: false,
-  profile: null,
-  errorMessage: null
-};
+export function getInitialAuthState(): State {
+  let token = localStorage.getItem('cert_token');
+  return {
+    token: token,
+    authenticated: false,
+    profile: null,
+    errorMessage: null
+  }
+}
 
-export function authReducer(state = initialState, action: AuthActions.AuthActions) {
+export function authReducer(state = getInitialAuthState(), action: AuthActions.AuthActions) {
   switch (action.type) {
+    case (AuthActions.HAS_VALID_TOKEN):
     case (AuthActions.SIGNUP):
     case (AuthActions.SIGNIN):
       return {
@@ -54,6 +58,11 @@ export function authReducer(state = initialState, action: AuthActions.AuthAction
         ...state,
         authenticated: false,
         errorMessage: "Incorrect login/password"
+      };
+    case (AuthActions.VERIFY_TOKEN):
+      return {
+        ...state,
+        token: action.payload.token
       };
     default:
       return state;
