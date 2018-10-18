@@ -8,7 +8,7 @@
     <span class="card-subtitle mb-2 text-muted">{{userExam.date_of_pass|date:'y-MM-d'}}</span>
     <p class="card-text" *ngIf="userExam.exam.description">{{userExam.exam.description}}</p>
     <div class="uce__card--buttons">
-      <button class="btn btn-outline-primary">Edit</button>
+      <button class="btn btn-outline-primary" (click)="openModal()">Edit</button>
       <button class="btn btn-outline-danger" (click)="deleteExam()">Delete</button>
     </div>
   </div>
