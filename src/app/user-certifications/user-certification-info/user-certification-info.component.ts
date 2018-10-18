@@ -3,7 +3,6 @@ import {ActivatedRoute} from '@angular/router';
 
 import {Store} from '@ngrx/store';
 import {Subscription} from 'rxjs';
-import {faCalendarAlt} from '@fortawesome/free-solid-svg-icons';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 import * as fromApp from '../../store/app.reducers';
@@ -14,6 +13,7 @@ import {Vendor} from '../../shared/models/vendor.model';
 import {VendorService} from '../services/vendor.service';
 import {UserExamService} from '../services/user-exam.service';
 import {UserExam} from '../models/user-exam.model';
+import {DateModalComponent} from '../common/date-modal/date-modal.component';
 
 @Component({
   selector: 'app-user-certification-info',
@@ -26,8 +26,6 @@ export class UserCertificationInfoComponent implements OnInit, OnDestroy {
   routeSubscription: Subscription;
   userExams: UserExam[] = [];
   storeSubscription: Subscription;
-  faCalendar = faCalendarAlt;
-  choosedCertDate = null;
   errorMessage = null;
 
   constructor(
@@ -75,28 +73,19 @@ export class UserCertificationInfoComponent implements OnInit, OnDestroy {
     }
   }
 
-  onCertDateSelect(event) {
-    this.choosedCertDate = event;
-  }
-
-  openDateModal(content) {
+  openDateModal() {
     this.errorMessage = null;
-    this.modalSvc.open(content).result.then((result) => {
-      if (this.choosedCertDate) {
-        this.userCert.expiration_date = new Date(this.choosedCertDate.year, this.choosedCertDate.month - 1, this.choosedCertDate.day);
-        this.userCertSvc.updateUserCertification(this.userCert).subscribe(
-          (response: UserCertification) => {
-            this.store.dispatch(new fromUserCertActions.ChooseUserCertification(response));
-          },
-          (err)=> {
-            this.errorMessage = 'Could not update user certification';
-          }
-          );
-      }
-      this.choosedCertDate = null;
-    }, (reason) => {
-      this.choosedCertDate = null;
-    });
+    const modalRef = this.modalSvc.open(DateModalComponent);
+    modalRef.componentInstance.title = 'certification expire date';
+    modalRef.result.then((result) => {
+      this.userCert.expiration_date = result;
+      this.userCertSvc.updateUserCertification(this.userCert).subscribe((response: UserCertification) => {
+        this.store.dispatch(new fromUserCertActions.ChooseUserCertification(response));
+        },
+        (err)=> {
+        this.errorMessage = 'Could not update user certification';
+      });
+    }, (reason) => {});
   }
 
   deleteUserCert() {

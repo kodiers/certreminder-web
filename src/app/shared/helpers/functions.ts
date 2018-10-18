@@ -1,3 +1,6 @@
+import * as moment from 'moment';
+import {API_DATE_FORMAT} from '../constants';
+
 export function formatDateToStr(date: Date): string {
   /*
   Function to format date to 'YYYY-mm-dd' format
@@ -16,4 +19,11 @@ export function deleteItemFromArray(arr: any[], itemToDelete: any): any[] {
     copiedArr.splice(index, 1);
   }
   return copiedArr;
+}
+
+export function formatDate(date: Date): string {
+  /*
+  Format date
+   */
+  return moment(date).format(API_DATE_FORMAT);
 }

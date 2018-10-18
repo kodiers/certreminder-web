@@ -1,4 +1,5 @@
 import {Action} from '@ngrx/store';
+
 import {UserCertification} from '../models/user-certification.model';
 import {Vendor} from '../../shared/models/vendor.model';
 import {UserExam} from '../models/user-exam.model';
@@ -16,6 +17,7 @@ export const SET_CHOOSED_USER_CERT_EXAMS = 'SET_CHOOSED_USER_CERT_EXAMS';
 export const TRY_DELETE_USER_CERT = 'TRY_DELETE_USER_CERT';
 export const DELETE_USER_CERT = 'DELETE_USER_CERT';
 export const DELETE_USER_CERT_EXAM = 'DELETE_USER_CERT_EXAM';
+export const UPDATE_USER_EXAM = 'UPDATE_USER_EXAM';
 
 export class GetAllUserCerts implements Action {
   readonly type = GET_ALL_USER_CERTS;
@@ -89,6 +91,13 @@ export class DeleteUserCertExam implements Action {
   constructor(public payload: UserExam) {}
 }
 
+export class UpdateUserExam implements Action {
+  readonly type = UPDATE_USER_EXAM;
+
+  constructor(public payload: UserExam) {}
+}
+
 export type UserCertActions = GetAllUserCerts | GetAllUserCertsFailed | SetAllUserCerts | GetAllVendors
   | GetAllVendorsFailed | SetAllVendors | ChooseUserCertification | GetChoosedUserCertExams
-  | GetChoosedUserCertExamsFailed | SetChoosedUserCertExams | DeleteUserCert | TryDeleteUserCert | DeleteUserCertExam;
+  | GetChoosedUserCertExamsFailed | SetChoosedUserCertExams | DeleteUserCert | TryDeleteUserCert | DeleteUserCertExam
+  | UpdateUserExam;

@@ -74,6 +74,14 @@ export function userCertReducer(state = initialCertState, action: UserCertAction
         ...state,
         choosedUserCertExams: choosedCertExams
       };
+    case (UserCertActions.UPDATE_USER_EXAM):
+      const exams = state.choosedUserCertExams.slice();
+      const examIndex = exams.findIndex(exam => exam.id === action.payload.id);
+      exams[examIndex] = action.payload;
+      return {
+        ...state,
+        choosedUserCertExams: exams
+      };
     default:
       return state;
   }

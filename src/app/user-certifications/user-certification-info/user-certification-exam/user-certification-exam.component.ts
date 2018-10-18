@@ -35,11 +35,16 @@ export class UserCertificationExamComponent implements OnInit {
   }
 
   openModal() {
-    // TODO: complete edit date modal
+    this.errorMessage = null;
     const modalRef = this.modalSvc.open(DateModalComponent);
     modalRef.componentInstance.title = 'exam pass date';
     modalRef.result.then((result) => {
-      console.log(result);
+      this.userExam.date_of_pass = result;
+      this.userExamSvc.updateUserExam(this.userExam).subscribe((exam) => {
+        this.store.dispatch(new fromUserCertActions.UpdateUserExam(exam));
+      }, (err) => {
+        this.errorMessage = 'Could not update user exam';
+      });
     }, (reason) => {});
   }
 
