@@ -15,6 +15,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {AuthModule} from './auth/auth.module';
 import {SharedModule} from './shared/shared.module';
 import {UserCertificationsModule} from './user-certifications/user-certifications.module';
+import {CertificationsModule} from './certifications/certifications.module';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './core/header/header.component';
@@ -39,8 +40,9 @@ import {JsonInterceptor} from './core/interceptors/json.interceptor';
     FontAwesomeModule,
     AuthModule,
     SharedModule,
-    AppRoutingModule,
     UserCertificationsModule,
+    CertificationsModule,
+    AppRoutingModule,
     HttpClientModule,
     StoreModule.forRoot(reducers),
     EffectsModule.forRoot([AuthEffects]),
