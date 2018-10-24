@@ -1,3 +1,33 @@
-<p>
-  new-certification works!
-</p>
+<div class="row">
+  <div class="col-sm-12 text-center">
+    <h1>Add new certification</h1>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-2 text-center">
+    <div class="form-group">
+      <label for="vendorInput">Choose vendor:</label>
+      <select class="form-control" id="vendorInput">
+        <option *ngFor="let vendor of vendors">{{vendor.title}}</option>
+      </select>
+    </div>
+  </div>
+  <div class="col-sm-4">
+    <div class="form-group">
+      <label for="certInput">Choose certification:</label>
+      <select class="form-control" id="certInput">
+        <option>Some text...</option>
+      </select>
+    </div>
+  </div>
+  <div class="col-sm-2">
+    <div class="form-group">
+      <label for="certDateInput">Choose certification expire date:</label>
+      <input class="form-control" id="certDateInput">
+    </div>
+  </div>
+  <div class="col-sm-4">
+    <h4>Certification description:</h4>
+    <p>Some more text...</p>
+  </div>
+</div>
