@@ -82,6 +82,12 @@ export function userCertReducer(state = initialCertState, action: UserCertAction
         ...state,
         choosedUserCertExams: exams
       };
+    case (UserCertActions.START_ADD_NEW_CERT):
+      return {
+        ...state,
+        choosedUserCertification: null,
+        choosedUserCertExams: null
+      };
     default:
       return state;
   }
