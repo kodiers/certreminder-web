@@ -7,7 +7,7 @@ import {UserExam} from '../../models/user-exam.model';
 import {UserExamService} from '../../services/user-exam.service';
 import * as fromApp from '../../../store/app.reducers';
 import * as fromUserCertActions from '../../store/user-certifications.actions';
-import {DateModalComponent} from '../../common/date-modal/date-modal.component';
+import {DateModalComponent} from '../../../shared/views/date-modal/date-modal.component';
 
 @Component({
   selector: 'app-user-certification-exam',

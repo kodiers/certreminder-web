@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 
 import {NgbActiveModal, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {EffectsModule} from '@ngrx/effects';
-import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 
 import {SharedModule} from '../shared/shared.module';
 import {UserCertificationsRoutingModule} from './user-certifications.routing.module';
@@ -13,7 +12,6 @@ import {UserCertificationService} from './services/user-certification.service';
 import {UserCertificationsEffects} from './store/user-certifications.effects';
 import { UserCertificationInfoComponent } from './user-certification-info/user-certification-info.component';
 import { UserCertificationExamComponent } from './user-certification-info/user-certification-exam/user-certification-exam.component';
-import { DateModalComponent } from './common/date-modal/date-modal.component';
 
 
 @NgModule({
@@ -22,20 +20,17 @@ import { DateModalComponent } from './common/date-modal/date-modal.component';
     NgbModule,
     SharedModule,
     UserCertificationsRoutingModule,
-    EffectsModule.forFeature([UserCertificationsEffects]),
-    FontAwesomeModule
+    EffectsModule.forFeature([UserCertificationsEffects])
   ],
   declarations: [
     UserCertificationListComponent,
     UserCertificationListItemComponent,
     UserCertificationInfoComponent,
     UserCertificationExamComponent,
-    DateModalComponent
   ],
   providers: [
     UserCertificationService,
     NgbActiveModal
-  ],
-  entryComponents: [DateModalComponent]
+  ]
 })
 export class UserCertificationsModule { }

@@ -13,7 +13,7 @@ import {Vendor} from '../../shared/models/vendor.model';
 import {VendorService} from '../services/vendor.service';
 import {UserExamService} from '../services/user-exam.service';
 import {UserExam} from '../models/user-exam.model';
-import {DateModalComponent} from '../common/date-modal/date-modal.component';
+import {DateModalComponent} from '../../shared/views/date-modal/date-modal.component';
 
 @Component({
   selector: 'app-user-certification-info',
