@@ -7,27 +7,33 @@
   <div class="col-sm-2 text-center">
     <div class="form-group">
       <label for="vendorInput">Choose vendor:</label>
-      <select class="form-control" id="vendorInput">
-        <option *ngFor="let vendor of vendors">{{vendor.title}}</option>
+      <select class="form-control" id="vendorInput" [(ngModel)]="choosedVendor" (ngModelChange)="selectVendor()">
+        <option [ngValue]="null">Vendor is...</option>
+        <option *ngFor="let vendor of vendors" [ngValue]="vendor">{{vendor.title}}</option>
       </select>
     </div>
   </div>
-  <div class="col-sm-4">
+  <div class="col-sm-4" *ngIf="choosedVendor && certifications.length > 0">
     <div class="form-group">
       <label for="certInput">Choose certification:</label>
-      <select class="form-control" id="certInput">
-        <option>Some text...</option>
+      <select class="form-control" id="certInput" [(ngModel)]="choosedCertification">
+        <option *ngFor="let certification of certifications" [ngValue]="certification">{{certification.title}}</option>
       </select>
     </div>
   </div>
-  <div class="col-sm-2">
+  <div class="col-sm-2" *ngIf="choosedCertification">
     <div class="form-group">
       <label for="certDateInput">Choose certification expire date:</label>
       <input class="form-control" id="certDateInput">
     </div>
   </div>
-  <div class="col-sm-4">
+  <div class="col-sm-4" *ngIf="choosedCertification && choosedCertification.description">
     <h4>Certification description:</h4>
-    <p>Some more text...</p>
+    <p>{{choosedCertification.description}}</p>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-12 text-center">
+    <button class="btn btn-outline-success" (click)="saveData()">Save</button>
   </div>
 </div>
