@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
 
 import {Store} from '@ngrx/store';
 
@@ -16,7 +17,7 @@ import {CertificationService} from '../services/certification.service';
 export class NewCertificationComponent implements OnInit {
   vendors: Vendor[] = [];
   certifications: Certification[] = [];
-  choosedVendor: Vendor = null;
+  userCertForm: FormGroup;
   choosedCertification: Certification = null;
 
   constructor(private store: Store<fromApp.AppState>,
@@ -29,15 +30,25 @@ export class NewCertificationComponent implements OnInit {
         this.store.dispatch(new fromUserCertActions.GetAllVendors());
       }
       this.vendors = data.vendors;
-    })
+    });
+    this.initForm();
+  }
+
+  initForm() {
+    let exams = new FormArray([]);
+    this.userCertForm = new FormGroup({
+      'vendor': new FormControl('', Validators.required),
+      'certification_id': new FormControl('', Validators.required),
+      'expiration_date': new FormControl('', Validators.required),
+      'exams': exams
+    });
   }
 
   selectVendor() {
-    if (this.choosedVendor) {
-      this.certSvc.getCertificationsForVendor(this.choosedVendor).subscribe(
+    if (this.userCertForm.controls['vendor'].value) {
+      this.certSvc.getCertificationsForVendor(this.userCertForm.controls['vendor'].value).subscribe(
         (certs: Certification[]) => {
           this.certifications = certs;
-          console.log(this.certifications);
         },
         (err) => {
           // TODO: handle error
@@ -45,8 +56,22 @@ export class NewCertificationComponent implements OnInit {
     }
   }
 
+  selectCertification() {
+    if (this.userCertForm.controls['certification_id'].value) {
+      const choosedCerts = this.certifications.filter((cert: Certification) => {
+        return cert.id === this.userCertForm.controls['certification_id'].value;
+      });
+      if (choosedCerts.length === 1) {
+        this.choosedCertification = choosedCerts[0];
+        return;
+      }
+    }
+    this.choosedCertification = null;
+  }
+
+
   saveData() {
-    console.log(this.choosedVendor);
+    console.log(this.userCertForm.value);
   }
 
 }
