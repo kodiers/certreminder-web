@@ -5,6 +5,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {NewCertificationComponent} from './new-certification/new-certification.component';
 import {CertificationsRoutingModule} from './certifications-routing.module';
 import {CertificationService} from './services/certification.service';
+import {ExamService} from './services/exam.service';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,9 @@ import {CertificationService} from './services/certification.service';
     CertificationsRoutingModule,
     ReactiveFormsModule
   ],
-  providers: [CertificationService]
+  providers: [
+    CertificationService,
+    ExamService
+  ]
 })
 export class CertificationsModule {}
