@@ -3,6 +3,20 @@
     <h1>Add new certification</h1>
   </div>
 </div>
+<div class="row">
+  <div class="col-sm-12 text-center">
+    <div class="alert alert-light">
+      You should choose Vendor, Certification and certification date. If you add exam you should choose exam and it's date.
+    </div>
+  </div>
+</div>
+<div class="row" *ngIf="errorMessage">
+  <div class="col-sm-12 text-center">
+    <div class="alert alert-danger">
+      {{errorMessage}}
+    </div>
+  </div>
+</div>
 <form [formGroup]="userCertForm" (ngSubmit)="saveData()">
   <div class="row">
     <div class="col-sm-2 text-center">
@@ -50,24 +64,22 @@
               <option *ngFor="let exam of exams" [ngValue]="exam.id">{{exam.title}}</option>
             </select>
           </div>
-          <div class="col-sm-2">
+          <div class="col-sm-4">
             <label for="certDateInput" *ngIf="getExamDate(i) === null">Choose exam pass date:</label>
             <label for="certDateInput" *ngIf="getExamDate(i)">{{getExamDate(i)|date: 'y-MM-d'}}</label>
             <br>
             <button (click)="chooseExamDate(i)" class="btn btn-outline-primary" type="button">Choose date</button>
             <input class="form-control" formControlName="date_of_pass" type="hidden">
-          </div>
-          <div class="col-sm-2">
-            <button type="button" class="btn btn-danger" (click)="deleteExam(i)">X</button>
+            <button type="button" class="btn btn-outline-danger ncc__delete-exam-btn" (click)="deleteExam(i)">Delete</button>
           </div>
         </div>
-        <button class="btn btn-outline-primary" (click)="addExam()" type="button">Add exam</button>
+        <button class="btn btn-outline-primary ncc__add-exam-btn" (click)="addExam()" type="button">Add exam</button>
       </div>
     </div>
   </ng-container>
   <div class="row">
     <div class="col-sm-12 text-center">
-      <button class="btn btn-outline-success" (click)="saveData()">Save</button>
+      <button class="btn btn-outline-success" type="submit" [disabled]="!userCertForm.valid">Save</button>
     </div>
   </div>
 </form>

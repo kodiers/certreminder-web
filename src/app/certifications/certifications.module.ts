@@ -6,6 +6,8 @@ import {NewCertificationComponent} from './new-certification/new-certification.c
 import {CertificationsRoutingModule} from './certifications-routing.module';
 import {CertificationService} from './services/certification.service';
 import {ExamService} from './services/exam.service';
+import {UserCertificationService} from '../user-certifications/services/user-certification.service';
+import {UserExamService} from '../user-certifications/services/user-exam.service';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import {ExamService} from './services/exam.service';
   ],
   providers: [
     CertificationService,
-    ExamService
+    ExamService,
+    UserCertificationService,
+    UserExamService
   ]
 })
 export class CertificationsModule {}
