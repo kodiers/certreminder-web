@@ -6,6 +6,7 @@ import * as fromApp from '../../store/app.reducers';
 import * as fromUserCertActions from '../store/user-certifications.actions';
 import {UserCertification} from '../models/user-certification.model';
 import {Vendor} from '../../shared/models/vendor.model';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-user-certification-list',
@@ -17,7 +18,8 @@ export class UserCertificationListComponent implements OnInit {
   userCertifications: UserCertification[];
   errorMessage: string;
 
-  constructor(private store: Store<fromApp.AppState>) {
+  constructor(private store: Store<fromApp.AppState>,
+              private router: Router) {
     this.store.dispatch(new fromUserCertActions.GetAllVendors());
     this.store.dispatch(new fromUserCertActions.GetAllUserCerts());
   }
@@ -30,6 +32,10 @@ export class UserCertificationListComponent implements OnInit {
         this.errorMessage = data.errorMessage;
       }
     });
+  }
+
+  addCertification() {
+    this.router.navigate(['/new-certification']);
   }
 
 }

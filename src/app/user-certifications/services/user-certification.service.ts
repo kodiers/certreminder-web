@@ -49,4 +49,12 @@ export class UserCertificationService {
     let url = this.USER_CERT_LIST_URL + `${userCert.id}/`;
     return this.httpClient.delete(url);
   }
+
+  createUserCertification(certificationId: number, expirationDate: string) {
+    /*
+    Create user certification. expirationDate should be in 'yyyy-mm-dd'
+     */
+    const data = {'certification_id': certificationId, 'expiration_date': expirationDate, 'remind_at_date': null};
+    return this.httpClient.post(this.USER_CERT_LIST_URL, data);
+  }
 }
