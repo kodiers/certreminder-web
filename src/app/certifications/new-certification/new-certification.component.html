@@ -31,12 +31,15 @@
     <div class="col-sm-4" *ngIf="userCertForm.controls['vendor'].value && certifications.length > 0">
       <div class="form-group">
         <label for="certInput">Choose certification:</label>
-        <select class="form-control" id="certInput" formControlName="certification_id" (change)="selectCertification()">
-          <option [ngValue]="''">Certification is...</option>
-          <option *ngFor="let certification of certifications" [ngValue]="certification.id">
-            {{certification.title}}
-          </option>
-        </select>
+        <ng-select
+          [items]="certifications"
+          formControlName="certification_id"
+          (change)="selectCertification()"
+          bindLabel="title"
+          bindValue="id"
+          labelForId="certInput"
+          placeholder="Certification is...">
+        </ng-select>
       </div>
     </div>
     <div class="col-sm-2" *ngIf="userCertForm.controls['certification_id'].value">
