@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import {FormsModule} from '@angular/forms';
 
 import {NgbActiveModal, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {EffectsModule} from '@ngrx/effects';
@@ -24,7 +25,8 @@ import {ExamService} from '../certifications/services/exam.service';
     SharedModule,
     UserCertificationsRoutingModule,
     EffectsModule.forFeature([UserCertificationsEffects]),
-    FontAwesomeModule
+    FontAwesomeModule,
+    FormsModule
   ],
   declarations: [
     UserCertificationListComponent,

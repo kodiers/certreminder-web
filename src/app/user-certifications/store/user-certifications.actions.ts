@@ -19,6 +19,7 @@ export const DELETE_USER_CERT = 'DELETE_USER_CERT';
 export const DELETE_USER_CERT_EXAM = 'DELETE_USER_CERT_EXAM';
 export const UPDATE_USER_EXAM = 'UPDATE_USER_EXAM';
 export const START_ADD_NEW_CERT = 'START_ADD_NEW_CERT';
+export const ADD_NEW_USER_EXAM = 'ADD_NEW_USER_EXAM';
 
 export class GetAllUserCerts implements Action {
   readonly type = GET_ALL_USER_CERTS;
@@ -102,7 +103,13 @@ export class StartAddNewCert implements Action {
   readonly type = START_ADD_NEW_CERT;
 }
 
+export class AddNewUserExam implements Action {
+  readonly type = ADD_NEW_USER_EXAM;
+
+  constructor(public payload: UserExam) {}
+}
+
 export type UserCertActions = GetAllUserCerts | GetAllUserCertsFailed | SetAllUserCerts | GetAllVendors
   | GetAllVendorsFailed | SetAllVendors | ChooseUserCertification | GetChoosedUserCertExams
   | GetChoosedUserCertExamsFailed | SetChoosedUserCertExams | DeleteUserCert | TryDeleteUserCert | DeleteUserCertExam
-  | UpdateUserExam | StartAddNewCert;
+  | UpdateUserExam | StartAddNewCert | AddNewUserExam;

@@ -16,6 +16,8 @@ export class UserCertificationAddExamComponent implements OnInit {
   faCalendar = faCalendarAlt;
   @Input() certification: Certification;
   exams: Exam[] = [];
+  choosedExamId: number;
+  choosedDate: Date;
 
   constructor(public activeModal: NgbActiveModal,
               private examSvc: ExamService) { }
@@ -24,6 +26,10 @@ export class UserCertificationAddExamComponent implements OnInit {
     this.examSvc.getExamsForCertification(this.certification).subscribe((exams: Exam[]) => {
       this.exams = exams;
     })
+  }
+
+  onCertDateSelect(event) {
+    this.choosedDate =  new Date(event.year, event.month - 1, event.day);
   }
 
 }
