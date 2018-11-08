@@ -14,6 +14,7 @@ import {VendorService} from '../services/vendor.service';
 import {UserExamService} from '../services/user-exam.service';
 import {UserExam} from '../models/user-exam.model';
 import {DateModalComponent} from '../../shared/views/date-modal/date-modal.component';
+import {UserCertificationAddExamComponent} from '../user-certification-add-exam/user-certification-add-exam.component';
 
 @Component({
   selector: 'app-user-certification-info',
@@ -66,6 +67,10 @@ export class UserCertificationInfoComponent implements OnInit, OnDestroy {
     this.storeSubscription.unsubscribe();
   }
 
+  private setErrorMessage(message: string) {
+    this.errorMessage = message;
+  }
+
   setUserCertAndVendor(cert: UserCertification, vendors: Vendor[]) {
     this.userCert = cert;
     if (vendors) {
@@ -74,7 +79,7 @@ export class UserCertificationInfoComponent implements OnInit, OnDestroy {
   }
 
   openDateModal() {
-    this.errorMessage = null;
+    this.setErrorMessage(null);
     const modalRef = this.modalSvc.open(DateModalComponent);
     modalRef.componentInstance.title = 'certification expire date';
     modalRef.result.then((result) => {
@@ -83,16 +88,31 @@ export class UserCertificationInfoComponent implements OnInit, OnDestroy {
         this.store.dispatch(new fromUserCertActions.ChooseUserCertification(response));
         },
         (err)=> {
-        this.errorMessage = 'Could not update user certification';
+        this.setErrorMessage('Could not update user certification');
       });
     }, (reason) => {});
+  }
+
+  addExamModal() {
+    this.setErrorMessage(null);
+    const modalRef = this.modalSvc.open(UserCertificationAddExamComponent);
+    modalRef.componentInstance.certification = this.userCert.certification;
+    modalRef.result.then(
+      (result) => {
+        this.userExamSvc.createUserExam(this.userCert.id, result.examId, result.date).subscribe((userExam: UserExam) => {
+          this.store.dispatch(new fromUserCertActions.AddNewUserExam(userExam));
+        }, (err) => {
+          this.setErrorMessage('Could not add user exam');
+        });
+      },
+      (reason) => {});
   }
 
   deleteUserCert() {
     this.userCertSvc.deleteUserCertification(this.userCert).subscribe(()=>{
       this.store.dispatch(new fromUserCertActions.TryDeleteUserCert(this.userCert));
     }, (err) => {
-      this.errorMessage = 'Could not delete user certification';
+      this.setErrorMessage('Could not delete user certification');
     });
   }
 

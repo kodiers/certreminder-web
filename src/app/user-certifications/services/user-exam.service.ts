@@ -46,7 +46,7 @@ export class UserExamService {
 
   createUsersExams(userCertId: number, data: [{exam_id: number, date_of_pass: string}]) {
     /*
-    Create user exam. date_of_pass should be formatted like 'yyyy-mm-dd'
+    Create user exams. date_of_pass should be formatted like 'yyyy-mm-dd'
      */
     let examsData: any[] = [];
     for (let examData of data) {
@@ -56,5 +56,14 @@ export class UserExamService {
     }
     const url = this.USER_EXAMS_API_URL + 'bulk/create/';
     return this.httpClient.post(url, {'exams': examsData});
+  }
+
+  createUserExam(userCertId: number, examId: number, date: Date) {
+    /*
+    Create user exam
+     */
+    const data = {user_certification_id: userCertId, 'exam_id': examId, 'date_of_pass': formatDate(date),
+      'remind_at_date': null};
+    return this.httpClient.post(this.USER_EXAMS_API_URL, data).map((response: UserExam) => response);
   }
 }

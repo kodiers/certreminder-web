@@ -88,6 +88,13 @@ export function userCertReducer(state = initialCertState, action: UserCertAction
         choosedUserCertification: null,
         choosedUserCertExams: null
       };
+    case (UserCertActions.ADD_NEW_USER_EXAM):
+      let userExams = state.choosedUserCertExams.slice();
+      userExams.push(action.payload);
+      return {
+        ...state,
+        choosedUserCertExams: userExams
+      };
     default:
       return state;
   }
