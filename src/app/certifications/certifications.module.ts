@@ -10,10 +10,12 @@ import {CertificationService} from './services/certification.service';
 import {ExamService} from './services/exam.service';
 import {UserCertificationService} from '../user-certifications/services/user-certification.service';
 import {UserExamService} from '../user-certifications/services/user-exam.service';
+import { CertificationListComponent } from './certification-list/certification-list.component';
 
 @NgModule({
   declarations: [
-    NewCertificationComponent
+    NewCertificationComponent,
+    CertificationListComponent
   ],
   imports: [
     CommonModule,

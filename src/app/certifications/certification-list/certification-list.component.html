@@ -1,0 +1,10 @@
+<div class="row">
+  <div class="col-sm-12 text-center">
+    <h1>List of certifications</h1>
+  </div>
+</div>
+<div class="row" *ngIf="vendors && vendors.length > 0">
+  <div class="col-sm-1 text-center" *ngFor="let vendor of vendors">
+    <button class="btn btn-outline-info cl__vendor--btn">{{vendor.title}}</button>
+  </div>
+</div>
