@@ -21,9 +21,14 @@
       <li class="nav-item">
         <a class="nav-link">Contact Us</a>
       </li>
-      <li class="nav-item" *ngIf="(authState|async).authenticated">
-        <a class="nav-link" routerLink="/user-certifications">My certifications</a>
-      </li>
+      <ng-container *ngIf="(authState|async).authenticated">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/certifications">Certifications</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/user-certifications">My certifications</a>
+        </li>
+      </ng-container>
     </ul>
     <ul class="nav justify-content-end" *ngIf="!(authState|async).authenticated; else notLogged">
       <li class="nav-item" routerLinkActive="active">
