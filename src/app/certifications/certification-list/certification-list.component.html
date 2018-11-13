@@ -16,14 +16,28 @@
              color="#000000"
              type="line-scale">
 </ngx-spinner>
-<div class="row cl__row" *ngIf="certifications.length > 0">
-  <div class="col-sm-12">
-    <ul class="list-group">
-      <app-certification-item
-        *ngFor="let certification of certifications"
-        [certification]="certification"
-        [vendors]="vendors">
-      </app-certification-item>
-    </ul>
+<ng-container *ngIf="certifications.length > 0">
+  <div class="row cl__row">
+    <div class="col-sm-6">
+      <input
+        class="form-control"
+        placeholder="Enter certification title..."
+        [(ngModel)]="searchStr"
+        (ngModelChange)="filterCertifications($event)">
+    </div>
+    <div class="col-sm-6">
+      <button class="btn btn-outline-dark" (click)="resetSearch()">Reset</button>
+    </div>
   </div>
-</div>
+  <div class="row cl__row">
+    <div class="col-sm-12">
+      <ul class="list-group">
+        <app-certification-item
+          *ngFor="let certification of certifications"
+          [certification]="certification"
+          [vendors]="vendors">
+        </app-certification-item>
+      </ul>
+    </div>
+  </div>
+</ng-container>

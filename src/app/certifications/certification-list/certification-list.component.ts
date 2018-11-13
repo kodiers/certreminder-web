@@ -19,6 +19,8 @@ export class CertificationListComponent implements OnInit {
   certifications: Certification[] = [];
   errorMessage: string = null;
   selectedVendorId: number = null;
+  searchStr: string = null;
+  initialCertifications: Certification[] = [];
 
   constructor(private store: Store<fromApp.AppState>,
               private certSvc: CertificationService,
@@ -37,18 +39,35 @@ export class CertificationListComponent implements OnInit {
   }
 
   selectVendor(vendor: Vendor) {
+    this.resetSearch();
     this.selectedVendorId = vendor.id;
     this.setErrorMessage(null);
     this.spinner.show();
     this.certSvc.getCertificationsForVendor(vendor).subscribe(
       (certifications: Certification[]) => {
         this.certifications = certifications;
+        this.initialCertifications = certifications.slice();
         this.spinner.hide();
       }, (error) => {
         this.spinner.hide();
         this.selectedVendorId = null;
         this.setErrorMessage(`Could not download certifications for vendor: ${vendor.title}.`);
       });
+  }
+
+  filterCertifications(event) {
+    if (this.searchStr) {
+      this.certifications = this.certifications.filter((certification) => {
+        return certification.title.toLowerCase().includes(this.searchStr.toLowerCase());
+      });
+    } else {
+      this.resetSearch();
+    }
+  }
+
+  resetSearch() {
+    this.searchStr = null;
+    this.certifications = this.initialCertifications.slice();
   }
 
 }
