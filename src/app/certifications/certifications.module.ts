@@ -15,12 +15,16 @@ import {UserExamService} from '../user-certifications/services/user-exam.service
 import { CertificationListComponent } from './certification-list/certification-list.component';
 import { CertificationItemComponent } from './certification-list/certification-item/certification-item.component';
 import {VendorService} from '../user-certifications/services/vendor.service';
+import { CertificationExamListComponent } from './certification-list/certification-item/certification-exam-list/certification-exam-list.component';
+import { CertificationExamItemComponent } from './certification-list/certification-item/certification-exam-list/certification-exam-item/certification-exam-item.component';
 
 @NgModule({
   declarations: [
     NewCertificationComponent,
     CertificationListComponent,
-    CertificationItemComponent
+    CertificationItemComponent,
+    CertificationExamListComponent,
+    CertificationExamItemComponent
   ],
   imports: [
     CommonModule,
