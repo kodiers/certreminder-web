@@ -1,0 +1,12 @@
+<button class="btn btn-outline-primary" *ngIf="exams.length === 0 && !infoMessage" (click)="getExams()">Show exams</button>
+<div class="alert alert-info" role="alert" *ngIf="infoMessage">
+  {{infoMessage}}
+</div>
+<div class="alert alert-danger" role="alert" *ngIf="errorMessage">
+  {{errorMessage}}
+</div>
+<ul class="list-group" *ngIf="exams.length > 0">
+  <li class="list-group-item" *ngFor="let exam of exams">
+    <app-certification-exam-item [exam]="exam"></app-certification-exam-item>
+  </li>
+</ul>
