@@ -17,6 +17,7 @@ import { CertificationItemComponent } from './certification-list/certification-i
 import {VendorService} from '../user-certifications/services/vendor.service';
 import { CertificationExamListComponent } from './certification-list/certification-item/certification-exam-list/certification-exam-list.component';
 import { CertificationExamItemComponent } from './certification-list/certification-item/certification-exam-list/certification-exam-item/certification-exam-item.component';
+import { AddExistingExamComponent } from './add-existing-exam/add-existing-exam.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { CertificationExamItemComponent } from './certification-list/certificati
     CertificationListComponent,
     CertificationItemComponent,
     CertificationExamListComponent,
-    CertificationExamItemComponent
+    CertificationExamItemComponent,
+    AddExistingExamComponent
   ],
   imports: [
     CommonModule,

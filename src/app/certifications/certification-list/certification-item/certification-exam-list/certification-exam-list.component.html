@@ -10,3 +10,6 @@
     <app-certification-exam-item [exam]="exam"></app-certification-exam-item>
   </li>
 </ul>
+<p class="cel__p" *ngIf="(exams.length === 0 && infoMessage) || exams.length > 0">
+  Could not find your exam in this list? You can add exam of this vendor <a class="text-primary">here.</a>
+</p>
