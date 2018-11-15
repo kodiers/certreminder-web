@@ -8,7 +8,7 @@ import {CertificationListComponent} from './certification-list/certification-lis
 
 const certRoutes: Routes = [
   {path: 'new-certification', component: NewCertificationComponent, canActivate: [AuthGuard]},
-  {path: 'certifications', component: CertificationListComponent}
+  {path: 'certifications', component: CertificationListComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({

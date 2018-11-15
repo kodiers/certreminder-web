@@ -7,7 +7,7 @@ import {UserCertificationListComponent} from './user-certification-list/user-cer
 import {UserCertificationInfoComponent} from './user-certification-info/user-certification-info.component';
 
 const userCertRoutes: Routes = [
-  { path: 'user-certifications', component: UserCertificationListComponent, canActivateChild: [AuthGuard], children:
+  { path: 'user-certifications', component: UserCertificationListComponent, canActivate: [AuthGuard], canActivateChild: [AuthGuard], children:
       [
         {path: ':user-cert-id', component: UserCertificationInfoComponent}
       ]

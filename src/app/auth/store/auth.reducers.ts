@@ -64,6 +64,13 @@ export function authReducer(state = getInitialAuthState(), action: AuthActions.A
         ...state,
         token: action.payload.token
       };
+    case (AuthActions.NOT_VALID_TOKEN):
+      return {
+        ...state,
+        authenticated: false,
+        token: null,
+        profile: null
+      };
     default:
       return state;
   }
