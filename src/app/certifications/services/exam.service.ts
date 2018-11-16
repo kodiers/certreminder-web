@@ -23,4 +23,14 @@ export class ExamService {
       return response.results;
     });
   }
+
+  public getExamsForVendorId(vendorId: number) {
+    /*
+    Get exams by vendor id
+     */
+    const params = new HttpParams().set('certification__vendor', `${vendorId}`);
+    return this.http.get(this.EXAM_LIST_URL, {params}).map((response: any) => {
+      return response.results;
+    });
+  }
 }
