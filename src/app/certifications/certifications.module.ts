@@ -5,7 +5,6 @@ import {NgSelectModule} from '@ng-select/ng-select';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {NgxSpinnerModule} from 'ngx-spinner';
 
-import {NewCertificationComponent} from './new-certification/new-certification.component';
 import {CertificationsRoutingModule} from './certifications-routing.module';
 import {CertificationService} from './services/certification.service';
 import {ExamService} from './services/exam.service';
@@ -21,7 +20,6 @@ import {SharedModule} from '../shared/shared.module';
 
 @NgModule({
   declarations: [
-    NewCertificationComponent,
     CertificationListComponent,
     CertificationItemComponent,
     CertificationExamListComponent,

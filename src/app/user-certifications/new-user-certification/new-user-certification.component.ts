@@ -5,25 +5,25 @@ import {Router} from '@angular/router';
 import {Store} from '@ngrx/store';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
-import * as fromUserCertActions from '../../user-certifications/store/user-certifications.actions';
+import * as fromUserCertActions from '../store/user-certifications.actions';
 import * as fromApp from '../../store/app.reducers';
 import {Vendor} from '../../shared/models/vendor.model';
 import {Certification} from '../../shared/models/certification.model';
-import {CertificationService} from '../services/certification.service';
+import {CertificationService} from '../../certifications/services/certification.service';
 import {DateModalComponent} from '../../shared/views/date-modal/date-modal.component';
 import {formatDateToStr} from '../../shared/helpers/functions';
-import {ExamService} from '../services/exam.service';
+import {ExamService} from '../../certifications/services/exam.service';
 import {Exam} from '../../shared/models/exam.model';
-import {UserCertificationService} from '../../user-certifications/services/user-certification.service';
-import {UserCertification} from '../../user-certifications/models/user-certification.model';
-import {UserExamService} from '../../user-certifications/services/user-exam.service';
+import {UserCertificationService} from '../services/user-certification.service';
+import {UserCertification} from '../models/user-certification.model';
+import {UserExamService} from '../services/user-exam.service';
 
 @Component({
-  selector: 'app-new-certification',
-  templateUrl: './new-certification.component.html',
-  styleUrls: ['./new-certification.component.scss']
+  selector: 'app-new-user-certification',
+  templateUrl: './new-user-certification.component.html',
+  styleUrls: ['./new-user-certification.component.scss']
 })
-export class NewCertificationComponent implements OnInit {
+export class NewUserCertificationComponent implements OnInit {
   vendors: Vendor[] = [];
   certifications: Certification[] = [];
   exams: Exam[] = [];

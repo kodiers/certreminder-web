@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import {NgbActiveModal, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {EffectsModule} from '@ngrx/effects';
@@ -16,6 +16,9 @@ import { UserCertificationInfoComponent } from './user-certification-info/user-c
 import { UserCertificationExamComponent } from './user-certification-info/user-certification-exam/user-certification-exam.component';
 import { UserCertificationAddExamComponent } from './user-certification-add-exam/user-certification-add-exam.component';
 import {ExamService} from '../certifications/services/exam.service';
+import {NewUserCertificationComponent} from './new-user-certification/new-user-certification.component';
+import {CertificationService} from '../certifications/services/certification.service';
+import {NgSelectModule} from '@ng-select/ng-select';
 
 
 @NgModule({
@@ -26,7 +29,9 @@ import {ExamService} from '../certifications/services/exam.service';
     UserCertificationsRoutingModule,
     EffectsModule.forFeature([UserCertificationsEffects]),
     FontAwesomeModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    NgSelectModule
   ],
   declarations: [
     UserCertificationListComponent,
@@ -34,10 +39,12 @@ import {ExamService} from '../certifications/services/exam.service';
     UserCertificationInfoComponent,
     UserCertificationExamComponent,
     UserCertificationAddExamComponent,
+    NewUserCertificationComponent
   ],
   providers: [
     UserCertificationService,
     ExamService,
+    CertificationService,
     NgbActiveModal
   ],
   entryComponents: [

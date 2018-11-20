@@ -26,8 +26,11 @@
         [(ngModel)]="searchStr"
         (ngModelChange)="filterCertifications($event)">
     </div>
-    <div class="col-sm-6">
+    <div class="col-sm-1">
       <button class="btn btn-outline-dark" (click)="resetSearch()">Reset</button>
+    </div>
+    <div class="col-sm-3">
+      Not found in list? You can <a class="text-primary">create</a> it.
     </div>
   </div>
   <div class="row cl__row">
