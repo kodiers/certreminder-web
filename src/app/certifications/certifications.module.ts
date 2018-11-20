@@ -1,5 +1,4 @@
 import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import {NgSelectModule} from '@ng-select/ng-select';
@@ -18,6 +17,7 @@ import {VendorService} from '../user-certifications/services/vendor.service';
 import { CertificationExamListComponent } from './certification-list/certification-item/certification-exam-list/certification-exam-list.component';
 import { CertificationExamItemComponent } from './certification-list/certification-item/certification-exam-list/certification-exam-item/certification-exam-item.component';
 import { AddExistingExamComponent } from './add-existing-exam/add-existing-exam.component';
+import {SharedModule} from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -29,13 +29,13 @@ import { AddExistingExamComponent } from './add-existing-exam/add-existing-exam.
     AddExistingExamComponent
   ],
   imports: [
-    CommonModule,
     CertificationsRoutingModule,
     ReactiveFormsModule,
     NgSelectModule,
     FormsModule,
     NgbModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    SharedModule
   ],
   providers: [
     CertificationService,

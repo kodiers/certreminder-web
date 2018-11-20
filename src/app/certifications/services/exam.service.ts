@@ -33,4 +33,13 @@ export class ExamService {
       return response.results;
     });
   }
+
+  public addCertificationToExam(exam: Exam, cerification: Certification) {
+    /*
+    Add certification to exam
+     */
+    const data = {'certification': [cerification.id]};
+    const url = this.EXAM_LIST_URL + `add/${exam.id}/`;
+    return this.http.patch(url, data);
+  }
 }
