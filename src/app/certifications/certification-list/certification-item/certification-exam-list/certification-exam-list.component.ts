@@ -1,9 +1,14 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+
+import {Store} from '@ngrx/store';
 
 import {Certification} from '../../../../shared/models/certification.model';
 import {Exam} from '../../../../shared/models/exam.model';
 import {ExamService} from '../../../services/exam.service';
-import {NgxSpinnerService} from 'ngx-spinner';
+import * as fromApp from '../../../../store/app.reducers';
+import * as CertActions from '../../../store/certifications.actions';
+import {Vendor} from '../../../../shared/models/vendor.model';
 
 @Component({
   selector: 'app-certification-exam-list',
@@ -12,11 +17,14 @@ import {NgxSpinnerService} from 'ngx-spinner';
 })
 export class CertificationExamListComponent implements OnInit {
   @Input() certification: Certification;
+  @Input() vendor: Vendor;
   exams: Exam[] = [];
   infoMessage: string = null;
   errorMessage: string = null;
 
-  constructor(private examSvc: ExamService) { }
+  constructor(private examSvc: ExamService,
+              private router: Router,
+              private store: Store<fromApp.AppState>) { }
 
   ngOnInit() {
   }
@@ -33,6 +41,11 @@ export class CertificationExamListComponent implements OnInit {
       (error) => {
         this.errorMessage = 'Could not download exams for certification';
       });
+  }
+
+  addExamToCertification() {
+    this.store.dispatch(new CertActions.CertificationChoosed({certification: this.certification, vendor: this.vendor}));
+    this.router.navigate(['add-exam', this.certification.id]);
   }
 
 }

@@ -4,3 +4,15 @@
 .alert-danger {
   margin-top: 10px;
 }
+.cel__p {
+  font-size: 0.9rem;
+
+  a {
+    font-weight: bold;
+
+    &:hover {
+      cursor: pointer;
+      text-decoration: underline;
+    }
+  }
+}

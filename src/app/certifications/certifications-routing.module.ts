@@ -5,10 +5,12 @@ import {AuthGuard} from '../auth/guards/auth.guard';
 
 import {NewCertificationComponent} from './new-certification/new-certification.component';
 import {CertificationListComponent} from './certification-list/certification-list.component';
+import {AddExistingExamComponent} from './add-existing-exam/add-existing-exam.component';
 
 const certRoutes: Routes = [
   {path: 'new-certification', component: NewCertificationComponent, canActivate: [AuthGuard]},
-  {path: 'certifications', component: CertificationListComponent}
+  {path: 'certifications', component: CertificationListComponent, canActivate: [AuthGuard]},
+  {path: 'add-exam/:id', component: AddExistingExamComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({

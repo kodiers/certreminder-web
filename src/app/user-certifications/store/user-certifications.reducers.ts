@@ -5,7 +5,7 @@ import {UserExam} from '../models/user-exam.model';
 import {deleteItemFromArray} from '../../shared/helpers/functions';
 
 
-export interface CertState {
+export interface UserCertState {
   userCertifications: UserCertification[],
   errorMessage: string,
   vendors: Vendor[],
@@ -13,7 +13,7 @@ export interface CertState {
   choosedUserCertExams: UserExam[]
 }
 
-const initialCertState: CertState = {
+const initialUserCertState: UserCertState = {
   userCertifications: null,
   errorMessage: null,
   vendors: null,
@@ -21,7 +21,7 @@ const initialCertState: CertState = {
   choosedUserCertExams: null
 };
 
-export function userCertReducer(state = initialCertState, action: UserCertActions.UserCertActions) {
+export function userCertReducer(state = initialUserCertState, action: UserCertActions.UserCertActions) {
   switch (action.type) {
     case (UserCertActions.SET_ALL_USER_CERTS):
       return {

@@ -11,9 +11,7 @@
       [ngClass]="{'active': selectedVendorId === vendor.id}">{{vendor.title}}</button>
   </div>
 </div>
-<div class="alert alert-danger cl__row" role="alert" *ngIf="errorMessage">
-  {{errorMessage}}
-</div>
+<app-error-message [error]="errorMessage"></app-error-message>
 <ngx-spinner bdColor="rgba(0,0,0,0)"
              size="large"
              color="#000000"

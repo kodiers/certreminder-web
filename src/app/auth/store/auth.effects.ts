@@ -68,7 +68,7 @@ export class AuthEffects {
       ];
     }
     return [{
-      type: fromAuthActions.LOGOUT
+      type: fromAuthActions.NOT_VALID_TOKEN
     }];
   });
 
