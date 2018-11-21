@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from '@angular/router';
 
 import {Store} from '@ngrx/store';
 import {NgxSpinnerService} from 'ngx-spinner';
 
-import * as fromApp from '../../store/app.reducers';
-import * as fromUserCertActions from '../../user-certifications/store/user-certifications.actions';
 import {Vendor} from '../../shared/models/vendor.model';
 import {Certification} from '../../shared/models/certification.model';
 import {CertificationService} from '../services/certification.service';
+import * as fromCertActions from '../store/certifications.actions';
+import * as fromApp from '../../store/app.reducers';
+import * as fromUserCertActions from '../../user-certifications/store/user-certifications.actions';
 
 @Component({
   selector: 'app-certification-list',
@@ -18,13 +20,14 @@ export class CertificationListComponent implements OnInit {
   vendors: Vendor[] = [];
   certifications: Certification[] = [];
   errorMessage: string = null;
-  selectedVendorId: number = null;
+  selectedVendor: Vendor = null;
   searchStr: string = null;
   initialCertifications: Certification[] = [];
 
   constructor(private store: Store<fromApp.AppState>,
               private certSvc: CertificationService,
-              private spinner: NgxSpinnerService) {
+              private spinner: NgxSpinnerService,
+              private router: Router) {
     this.store.dispatch(new fromUserCertActions.GetAllVendors());
   }
 
@@ -40,7 +43,7 @@ export class CertificationListComponent implements OnInit {
 
   selectVendor(vendor: Vendor) {
     this.resetSearch();
-    this.selectedVendorId = vendor.id;
+    this.selectedVendor = vendor;
     this.setErrorMessage(null);
     this.spinner.show();
     this.certSvc.getCertificationsForVendor(vendor).subscribe(
@@ -50,7 +53,7 @@ export class CertificationListComponent implements OnInit {
         this.spinner.hide();
       }, (error) => {
         this.spinner.hide();
-        this.selectedVendorId = null;
+        this.selectedVendor = null;
         this.setErrorMessage(`Could not download certifications for vendor: ${vendor.title}.`);
       });
   }
@@ -68,6 +71,11 @@ export class CertificationListComponent implements OnInit {
   resetSearch() {
     this.searchStr = null;
     this.certifications = this.initialCertifications.slice();
+  }
+
+  createCertification() {
+    this.store.dispatch(new fromCertActions.VendorForCreateChoosed(this.selectedVendor));
+    this.router.navigate(['/new-certification']);
   }
 
 }

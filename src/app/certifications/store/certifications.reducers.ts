@@ -15,6 +15,11 @@ export function certReducer(state: CertState, action: CertActions.Certifications
         certification: action.payload.certification,
         vendor: action.payload.vendor
       };
+    case (CertActions.VENDOR_FOR_CREATE_CHOOSED):
+      return {
+        ...state,
+        vendor: action.payload
+      };
     default:
       return state;
   }

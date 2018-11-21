@@ -13,7 +13,7 @@ const userCertRoutes: Routes = [
         {path: ':user-cert-id', component: UserCertificationInfoComponent}
       ]
   },
-  {path: 'new-certification', component: NewUserCertificationComponent, canActivate: [AuthGuard]},
+  {path: 'new-user-certification', component: NewUserCertificationComponent, canActivate: [AuthGuard]},
 ];
 
 @NgModule({

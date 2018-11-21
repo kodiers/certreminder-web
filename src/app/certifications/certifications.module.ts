@@ -17,6 +17,7 @@ import { CertificationExamListComponent } from './certification-list/certificati
 import { CertificationExamItemComponent } from './certification-list/certification-item/certification-exam-list/certification-exam-item/certification-exam-item.component';
 import { AddExistingExamComponent } from './add-existing-exam/add-existing-exam.component';
 import {SharedModule} from '../shared/shared.module';
+import { NewCertificationComponent } from './new-certification/new-certification.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import {SharedModule} from '../shared/shared.module';
     CertificationItemComponent,
     CertificationExamListComponent,
     CertificationExamItemComponent,
-    AddExistingExamComponent
+    AddExistingExamComponent,
+    NewCertificationComponent
   ],
   imports: [
     CertificationsRoutingModule,

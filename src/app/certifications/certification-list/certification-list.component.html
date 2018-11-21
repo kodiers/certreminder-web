@@ -1,14 +1,10 @@
-<div class="row">
-  <div class="col-sm-12 text-center">
-    <h1>List of certifications</h1>
-  </div>
-</div>
+<app-title [title]="'List of certifications'"></app-title>
 <div class="row" *ngIf="vendors && vendors.length > 0">
   <div class="col-sm-1 text-center" *ngFor="let vendor of vendors">
     <button
       class="btn btn-outline-info cl__vendor--btn"
       (click)="selectVendor(vendor)"
-      [ngClass]="{'active': selectedVendorId === vendor.id}">{{vendor.title}}</button>
+      [ngClass]="{'active': selectedVendor?.id === vendor.id}">{{vendor.title}}</button>
   </div>
 </div>
 <app-error-message [error]="errorMessage"></app-error-message>
@@ -30,7 +26,7 @@
       <button class="btn btn-outline-dark" (click)="resetSearch()">Reset</button>
     </div>
     <div class="col-sm-3">
-      Not found in list? You can <a class="text-primary">create</a> it.
+      Not found in list? You can <a class="text-primary" (click)="createCertification()">create</a> it.
     </div>
   </div>
   <div class="row cl__row">

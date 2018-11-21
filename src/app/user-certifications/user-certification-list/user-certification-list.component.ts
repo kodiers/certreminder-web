@@ -35,7 +35,7 @@ export class UserCertificationListComponent implements OnInit {
   }
 
   addCertification() {
-    this.router.navigate(['/new-certification']);
+    this.router.navigate(['/new-user-certification']);
   }
 
 }
