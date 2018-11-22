@@ -18,6 +18,7 @@ import {AuthModule} from './auth/auth.module';
 import {SharedModule} from './shared/shared.module';
 import {UserCertificationsModule} from './user-certifications/user-certifications.module';
 import {CertificationsModule} from './certifications/certifications.module';
+import {ProfileModule} from './profile/profile.module';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './core/header/header.component';
@@ -44,6 +45,7 @@ import {JsonInterceptor} from './core/interceptors/json.interceptor';
     SharedModule,
     UserCertificationsModule,
     CertificationsModule,
+    ProfileModule,
     AppRoutingModule,
     HttpClientModule,
     StoreModule.forRoot(reducers),
