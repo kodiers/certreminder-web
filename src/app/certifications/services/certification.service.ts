@@ -23,4 +23,11 @@ export class CertificationService {
       return response.results;
     });
   }
+
+  createCertification(data): Observable<Certification> {
+    /*
+    Create certification
+     */
+    return this.http.post(this.CERT_LIST_URL, data).map((response: any) => { return response});
+  }
 }

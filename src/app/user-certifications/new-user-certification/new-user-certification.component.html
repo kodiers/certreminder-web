@@ -1,0 +1,84 @@
+<app-title [title]="'Add new certification'"></app-title>
+<div class="row">
+  <div class="col-sm-12 text-center">
+    <div class="alert alert-light">
+      You should choose Vendor, Certification and certification date. If you add exam you should choose exam and it's date.
+    </div>
+  </div>
+</div>
+<div class="row" *ngIf="errorMessage">
+  <div class="col-sm-12 text-center">
+    <div class="alert alert-danger">
+      {{errorMessage}}
+    </div>
+  </div>
+</div>
+<form [formGroup]="userCertForm" (ngSubmit)="saveData()">
+  <div class="row">
+    <div class="col-sm-2 text-center">
+      <div class="form-group">
+        <label for="vendorInput">Choose vendor:</label>
+        <select class="form-control" id="vendorInput" formControlName="vendor" (change)="selectVendor()">
+          <option [ngValue]="''">Vendor is...</option>
+          <option *ngFor="let vendor of vendors" [ngValue]="vendor">{{vendor.title}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-sm-4" *ngIf="userCertForm.controls['vendor'].value && certifications.length > 0">
+      <div class="form-group">
+        <label for="certInput">Choose certification:</label>
+        <ng-select
+          [items]="certifications"
+          formControlName="certification_id"
+          (change)="selectCertification()"
+          bindLabel="title"
+          bindValue="id"
+          labelForId="certInput"
+          placeholder="Certification is...">
+        </ng-select>
+      </div>
+    </div>
+    <div class="col-sm-2" *ngIf="userCertForm.controls['certification_id'].value">
+      <div class="form-group">
+        <label for="certDateInput" *ngIf="certDate === null">Choose certification expire date:</label>
+        <label for="certDateInput" *ngIf="certDate">{{certDate|date: 'y-MM-d'}}</label>
+        <br>
+        <button (click)="chooseCertDate()" class="btn btn-outline-primary" type="button">Choose date</button>
+        <input class="form-control" id="certDateInput" formControlName="expiration_date" type="hidden">
+      </div>
+    </div>
+    <div class="col-sm-4" *ngIf="choosedCertification && choosedCertification.description">
+      <h4>Certification description:</h4>
+      <p class="ncc__descritption">{{choosedCertification.description}}</p>
+    </div>
+  </div>
+  <ng-container *ngIf="userCertForm.controls['certification_id'].value && exams.length > 0">
+    <div class="row" formArrayName="exams">
+      <div class="col-sm-12">
+        <div class="row" *ngFor="let examCtrl of getControls(); let i = index" [formGroupName]="i">
+          <div class="col-sm-8">
+            <label>Choose exam</label>
+            <select class="form-control" formControlName="exam_id">
+              <option [ngValue]="''">Choose exam...</option>
+              <option *ngFor="let exam of exams" [ngValue]="exam.id">{{exam.title}}</option>
+            </select>
+          </div>
+          <div class="col-sm-4">
+            <label for="certDateInput" *ngIf="getExamDate(i) === null">Choose exam pass date:</label>
+            <label for="certDateInput" *ngIf="getExamDate(i)">{{getExamDate(i)|date: 'y-MM-d'}}</label>
+            <br>
+            <button (click)="chooseExamDate(i)" class="btn btn-outline-primary" type="button">Choose date</button>
+            <input class="form-control" formControlName="date_of_pass" type="hidden">
+            <button type="button" class="btn btn-outline-danger ncc__delete-exam-btn" (click)="deleteExam(i)">Delete</button>
+          </div>
+        </div>
+        <button class="btn btn-outline-primary ncc__add-exam-btn" (click)="addExam()" type="button">Add exam</button>
+      </div>
+    </div>
+  </ng-container>
+  <div class="row">
+    <div class="col-sm-12 text-center">
+      <button class="btn btn-outline-success" type="submit" [disabled]="!userCertForm.valid">Save</button>
+    </div>
+  </div>
+</form>

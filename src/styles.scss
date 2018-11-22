@@ -17,3 +17,11 @@
   border-top: 1px solid gray;
   display: inline-block;
 }
+a.text-primary {
+  font-weight: bold;
+
+  &:hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+}
