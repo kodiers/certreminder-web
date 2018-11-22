@@ -75,4 +75,8 @@ export class AddExistingExamComponent implements OnInit {
     });
   }
 
+  newExam() {
+    this.router.navigate(['/new-exam']);
+  }
+
 }
