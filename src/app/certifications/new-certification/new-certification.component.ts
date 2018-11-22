@@ -16,7 +16,6 @@ import {CertificationService} from '../services/certification.service';
 })
 export class NewCertificationComponent implements OnInit {
   vendor: Vendor;
-  formData: any = {};
   errorMessage: string = null;
 
   constructor(private store: Store<fromApp.AppState>,

@@ -24,7 +24,7 @@ export class ExamService {
     });
   }
 
-  public getExamsForVendorId(vendorId: number) {
+  public getExamsForVendorId(vendorId: number): Observable<Exam[]> {
     /*
     Get exams by vendor id
      */
@@ -41,5 +41,12 @@ export class ExamService {
     const data = {'certification': [cerification.id]};
     const url = this.EXAM_LIST_URL + `add/${exam.id}/`;
     return this.http.patch(url, data);
+  }
+
+  public createNewExam(examData): Observable<Exam> {
+    /*
+    Create new exam
+     */
+    return this.http.post(this.EXAM_LIST_URL, examData).map((response:any) => response);
   }
 }

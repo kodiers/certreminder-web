@@ -14,7 +14,7 @@ export class CertificationService {
 
   constructor(private http: HttpClient) { }
 
-  getCertificationsForVendor(vendor: Vendor): Observable<Certification[]> {
+  public getCertificationsForVendor(vendor: Vendor): Observable<Certification[]> {
     /*
     Get certifications for vendor
      */
@@ -24,7 +24,7 @@ export class CertificationService {
     });
   }
 
-  createCertification(data): Observable<Certification> {
+  public createCertification(data): Observable<Certification> {
     /*
     Create certification
      */
