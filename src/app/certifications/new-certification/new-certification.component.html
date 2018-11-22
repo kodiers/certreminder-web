@@ -3,7 +3,8 @@
   <form #certForm="ngForm" (ngSubmit)="createCertification(certForm)">
     <div class="form-row">
       <div class="form-group col-md-6 offset-3">
-        <label for="idTitle">Certification title</label>
+        <label for="idTitle">Certification title:</label>
+        <app-question-icon placement="top" tooltip="This field is required"></app-question-icon>
         <input
           type="text"
           id="idTitle"
@@ -12,6 +13,7 @@
           name="title"
           [(ngModel)]="formData.title"
           #title="ngModel">
+        <app-error-message [error]="'This field is required'" *ngIf="!title.valid && title.touched"></app-error-message>
       </div>
     </div>
     <div class="form-row">
@@ -50,7 +52,7 @@
     </div>
     <div class="form-row">
       <div class="form-group col-md-6 offset-3">
-        <button class="btn btn-outline-primary">Save</button>
+        <button class="btn btn-outline-primary" [disabled]="!certForm.valid && certForm.touched">Save</button>
       </div>
     </div>
   </form>
