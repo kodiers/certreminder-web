@@ -1,3 +1,35 @@
-<p>
-  profile works!
-</p>
+<app-title [title]="'Your profile: ' + profile?.user.username"></app-title>
+<app-error-message [error]="errorMessage" *ngIf="errorMessage"></app-error-message>
+<div class="row p__row" *ngIf="profile">
+  <div class="col-xs-6">
+    <div class="card">
+      <div class="card-body">
+        <div class="row" *ngIf="profile">
+          <div class="col-xs-12">
+            Your username: {{profile.user.username}}
+          </div>
+        </div>
+        <div class="row" *ngIf="profile.user.email">
+          <div class="col-xs-12">
+            Your email: {{profile.user.email}}
+          </div>
+        </div>
+        <div class="row" *ngIf="profile.user.first_name">
+          <div class="col-xs-12">
+            Your first name: {{profile.user.first_name}}
+          </div>
+        </div>
+        <div class="row" *ngIf="profile.user.last_name">
+          <div class="col-xs-12">
+            Your last name: {{profile.user.last_name}}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            Registered at: {{profile.created|date:'y-MM-d'}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
