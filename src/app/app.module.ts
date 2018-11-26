@@ -28,6 +28,7 @@ import {reducers} from './store/app.reducers';
 import {AuthEffects} from './auth/store/auth.effects';
 import {TokenInterceptor} from './auth/interceptors/token.interceptor';
 import {JsonInterceptor} from './core/interceptors/json.interceptor';
+import { AboutComponent } from './core/about/about.component';
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import {JsonInterceptor} from './core/interceptors/json.interceptor';
     HeaderComponent,
     HomeComponent,
     NotFoundComponent,
+    AboutComponent,
   ],
   imports: [
     BrowserModule,
@@ -61,4 +63,6 @@ import {JsonInterceptor} from './core/interceptors/json.interceptor';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+
+}
