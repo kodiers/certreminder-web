@@ -29,6 +29,7 @@ import {AuthEffects} from './auth/store/auth.effects';
 import {TokenInterceptor} from './auth/interceptors/token.interceptor';
 import {JsonInterceptor} from './core/interceptors/json.interceptor';
 import { AboutComponent } from './core/about/about.component';
+import { ContactComponent } from './core/contact/contact.component';
 
 
 @NgModule({
@@ -38,6 +39,7 @@ import { AboutComponent } from './core/about/about.component';
     HomeComponent,
     NotFoundComponent,
     AboutComponent,
+    ContactComponent,
   ],
   imports: [
     BrowserModule,
