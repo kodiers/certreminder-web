@@ -1,3 +1,5 @@
+
+import {map} from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
@@ -19,9 +21,9 @@ export class ExamService {
     Get exams for certification
      */
     const params = new HttpParams().set('certification', `${certification.id}`);
-    return this.http.get(this.EXAM_LIST_URL, {params}).map( (response: any) => {
+    return this.http.get(this.EXAM_LIST_URL, {params}).pipe(map( (response: any) => {
       return response.results;
-    });
+    }));
   }
 
   public getExamsForVendorId(vendorId: number): Observable<Exam[]> {
@@ -29,9 +31,9 @@ export class ExamService {
     Get exams by vendor id
      */
     const params = new HttpParams().set('certification__vendor', `${vendorId}`);
-    return this.http.get(this.EXAM_LIST_URL, {params}).map((response: any) => {
+    return this.http.get(this.EXAM_LIST_URL, {params}).pipe(map((response: any) => {
       return response.results;
-    });
+    }));
   }
 
   public addCertificationToExam(exam: Exam, cerification: Certification) {
@@ -47,6 +49,6 @@ export class ExamService {
     /*
     Create new exam
      */
-    return this.http.post(this.EXAM_LIST_URL, examData).map((response:any) => response);
+    return this.http.post(this.EXAM_LIST_URL, examData).pipe(map((response:any) => response));
   }
 }

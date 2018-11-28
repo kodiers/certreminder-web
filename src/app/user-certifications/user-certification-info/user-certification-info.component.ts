@@ -1,3 +1,5 @@
+
+import {map, take, switchMap} from 'rxjs/operators';
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 
@@ -49,12 +51,12 @@ export class UserCertificationInfoComponent implements OnInit, OnDestroy {
       } else {
         // If state doesn't have choosedSubscription - get it from server using route param
         // TODO: this code emit store.select twice - need to fix
-        this.routeSubscription = this.activatedRoute.params.map(data => data['user-cert-id']).switchMap(certId => {
+        this.routeSubscription = this.activatedRoute.params.pipe(map(data => data['user-cert-id']),switchMap(certId => {
           return this.userCertSvc.getUserCertification(certId);
-        }).subscribe(userCert => {
+        }),).subscribe(userCert => {
           this.setUserCertAndVendor(userCert, data.vendors);
           this.store.dispatch(new fromUserCertActions.ChooseUserCertification(this.userCert));
-          this.userExamSvc.getUserExamsForUserCertification(this.userCert.id).take(1).subscribe((userExams: UserExam[]) => {
+          this.userExamSvc.getUserExamsForUserCertification(this.userCert.id).pipe(take(1)).subscribe((userExams: UserExam[]) => {
             this.userExams = userExams;
             this.store.dispatch(new fromUserCertActions.SetChoosedUserCertExams(this.userExams));
           });

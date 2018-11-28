@@ -1,9 +1,11 @@
+
+import {catchError, map} from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import {of as observableOf} from 'rxjs';
 
 import {API_URL} from '../../shared/constants';
 import {Vendor} from '../../shared/models/vendor.model';
-import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -15,13 +17,13 @@ export class VendorService {
   constructor(private httpClient: HttpClient) { }
 
   getAllVendors() {
-    return this.httpClient.get(this.VENDOR_API_URL).map((response: any) => {
+    return this.httpClient.get(this.VENDOR_API_URL).pipe(map((response: any) => {
       const vendors: Vendor[] = response.results;
       return {vendors: vendors, error: null};
-    }).catch( err => {
+    }),catchError( err => {
       const data = {vendors: null, error: err };
-      return Observable.of(data);
-    });
+      return observableOf(data);
+    }),);
   }
 
   getVendorById(id: number, vendors: Vendor[]) {

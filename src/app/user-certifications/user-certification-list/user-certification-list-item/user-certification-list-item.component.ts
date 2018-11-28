@@ -1,3 +1,5 @@
+
+import {take} from 'rxjs/operators';
 import { Component, OnInit, Input } from '@angular/core';
 
 import {Store} from '@ngrx/store';
@@ -34,7 +36,7 @@ export class UserCertificationListItemComponent implements OnInit {
 
   onSelect() {
     this.store.dispatch(new fromUserCertActions.ChooseUserCertification(this.userCert));
-    this.userExamSvc.getUserExamsForUserCertification(this.userCert.id).take(1).subscribe((userExams: UserExam[]) => {
+    this.userExamSvc.getUserExamsForUserCertification(this.userCert.id).pipe(take(1)).subscribe((userExams: UserExam[]) => {
       this.store.dispatch(new fromUserCertActions.SetChoosedUserCertExams(userExams));
     });
   }
