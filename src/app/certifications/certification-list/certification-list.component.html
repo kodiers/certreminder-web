@@ -1,0 +1,43 @@
+<app-title [title]="'List of certifications'"></app-title>
+<div class="row" *ngIf="vendors && vendors.length > 0">
+  <div class="col-sm-1 text-center" *ngFor="let vendor of vendors">
+    <button
+      class="btn btn-outline-info cl__vendor--btn"
+      (click)="selectVendor(vendor)"
+      [ngClass]="{'active': selectedVendor?.id === vendor.id}">{{vendor.title}}</button>
+  </div>
+</div>
+<app-error-message [error]="errorMessage"></app-error-message>
+<ngx-spinner bdColor="rgba(0,0,0,0)"
+             size="large"
+             color="#000000"
+             type="line-scale">
+</ngx-spinner>
+<ng-container *ngIf="certifications.length > 0">
+  <div class="row cl__row">
+    <div class="col-sm-6">
+      <input
+        class="form-control"
+        placeholder="Enter certification title..."
+        [(ngModel)]="searchStr"
+        (ngModelChange)="filterCertifications($event)">
+    </div>
+    <div class="col-sm-1">
+      <button class="btn btn-outline-dark" (click)="resetSearch()">Reset</button>
+    </div>
+    <div class="col-sm-3">
+      Not found in list? You can <a class="text-primary" (click)="createCertification()">create</a> it.
+    </div>
+  </div>
+  <div class="row cl__row">
+    <div class="col-sm-12">
+      <ul class="list-group">
+        <app-certification-item
+          *ngFor="let certification of certifications"
+          [certification]="certification"
+          [vendors]="vendors">
+        </app-certification-item>
+      </ul>
+    </div>
+  </div>
+</ng-container>

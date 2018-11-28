@@ -1,0 +1,64 @@
+<div class="row">
+  <div class="col-md-4 offset-md-4 text-center">
+    <h1>Sign Up</h1>
+    <form (ngSubmit)="onSignup(f)" #f="ngForm">
+      <div *ngIf="(authState|async).errorMessage !== null" class="alert alert-danger">
+        {{(authState|async).errorMessage}}
+      </div>
+      <div class="form-group">
+        <label for="username">Enter your username:</label>
+        <input
+          type="text"
+          id="username"
+          class="form-control"
+          placeholder="enter your username"
+          name="username"
+          required
+          ngModel
+        >
+      </div>
+      <div class="form-group">
+        <app-question-icon placement="top" tooltip="Password should be 8+ charcters, don't be same as username and cannot contains only digits"></app-question-icon>
+        <label for="password">Enter your password:</label>
+        <input
+          type="password"
+          id="password"
+          class="form-control"
+          placeholder="enter your password"
+          name="password"
+          required
+          ngModel
+          #password="ngModel"
+          appPasswordRules
+          validateEqual="username"
+          reverse="true"
+          minlength="8">
+        <div *ngIf="!password.valid && password.touched && password.errors.validateEqualFails === true" class="alert alert-danger">
+          Password and username cannot be same
+        </div>
+        <div *ngIf="!password.valid && password.touched && password.errors.viloaterules === true" class="alert alert-danger">
+          Password doesn't meet requriments
+        </div>
+      </div>
+      <div class="form-group">
+        <app-question-icon placement="top" tooltip="Password and password confirmation should be same"></app-question-icon>
+        <label for="confirm_password">Confirm your password:</label>
+        <input
+          type="password"
+          id="confirm_password"
+          class="form-control"
+          placeholder="confirm your password"
+          name="confirm_password"
+          #confirm_password="ngModel"
+          required
+          ngModel
+          validateEqual="password"
+          minlength="8">
+        <div *ngIf="!confirm_password.valid && confirm_password.touched && confirm_password.errors.validateEqualFails === true" class="alert alert-danger">
+          Password and confirmation should be same
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary" [disabled]="f.invalid">Sign Up</button>
+    </form>
+  </div>
+</div>

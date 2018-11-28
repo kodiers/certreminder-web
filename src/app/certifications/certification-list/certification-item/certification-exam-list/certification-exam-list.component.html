@@ -1,0 +1,13 @@
+<button class="btn btn-outline-primary" *ngIf="exams.length === 0 && !infoMessage" (click)="getExams()">Show exams</button>
+<div class="alert alert-info" role="alert" *ngIf="infoMessage">
+  {{infoMessage}}
+</div>
+<app-error-message [error]="errorMessage"></app-error-message>
+<ul class="list-group" *ngIf="exams.length > 0">
+  <li class="list-group-item" *ngFor="let exam of exams">
+    <app-certification-exam-item [exam]="exam"></app-certification-exam-item>
+  </li>
+</ul>
+<p class="cel__p" *ngIf="(exams.length === 0 && infoMessage) || exams.length > 0">
+  Could not find your exam in this list? You can add exam of this vendor <a class="text-primary" (click)="addExamToCertification()">here.</a>
+</p>

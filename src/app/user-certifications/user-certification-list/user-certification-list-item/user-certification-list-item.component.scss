@@ -1,0 +1,16 @@
+.certification__description--a {
+  font-size: 0.7em;
+  color: dimgrey;
+  &:hover {
+    text-decoration: none;
+  }
+}
+.certification__title--a {
+  color: #212529;;
+  &:hover {
+    text-decoration: none;
+  }
+}
+.active-link {
+  border-color: #857777;
+}

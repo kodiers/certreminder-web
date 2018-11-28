@@ -1,0 +1,19 @@
+<app-title [title]="'My certifications'"></app-title>
+<div class="row">
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
+  </div>
+  <div class="col-sm-4">
+    <button class="btn btn-outline-success ucl__add" (click)="addCertification()">Add certification</button>
+    <ul class="list-group" *ngIf="userCertifications && vendors">
+      <app-user-certification-list-item
+        *ngFor="let userCertEl of userCertifications"
+        [userCert]="userCertEl"
+        [vendors]="vendors">
+      </app-user-certification-list-item>
+    </ul>
+  </div>
+  <div class="col-sm-8">
+    <router-outlet></router-outlet>
+  </div>
+</div>

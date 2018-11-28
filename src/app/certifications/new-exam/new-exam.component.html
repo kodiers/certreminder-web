@@ -1,0 +1,58 @@
+<app-title [title]="'Create new exam for certification ' + certification?.title"></app-title>
+<app-error-message [error]="errorMessage" *ngIf="errorMessage"></app-error-message>
+<form #examForm="ngForm" (ngSubmit)="createExam(examForm)">
+  <div class="form-row">
+    <div class="form-group col-md-6 offset-3">
+      <label for="idTitle">Exam title:</label>
+      <app-question-icon placement="top" tooltip="This field is required"></app-question-icon>
+      <input
+        type="text"
+        id="idTitle"
+        class="form-control"
+        required
+        name="title"
+        ngModel=""
+        #title="ngModel">
+      <app-error-message [error]="'This field is required'" *ngIf="!title.valid && title.touched"></app-error-message>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6 offset-3">
+      <label for="idNumber">Exam number</label>
+      <input
+        type="text"
+        id="idNumber"
+        class="form-control"
+        name="number"
+        ngModel="">
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6 offset-3">
+      <label for="idDescription">Exam description</label>
+      <textarea
+        id="idDescription"
+        class="form-control"
+        rows="3"
+        name="description"
+        ngModel>
+      </textarea>
+    </div>
+  </div>
+  <div class="form-row form-check">
+    <div class="form-group col-md-6 offset-3">
+      <input
+        type="checkbox"
+        class="form-check-input"
+        id="idDeprecated"
+        name="deprecated"
+        ngModel>
+      <label class="form-check-label" for="idDeprecated">Is deprecated</label>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6 offset-3">
+      <button class="btn btn-outline-primary" [disabled]="!examForm.valid && examForm.touched">Save</button>
+    </div>
+  </div>
+</form>
