@@ -1,3 +1,5 @@
+
+import {map, switchMap, mergeMap} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
 import {Effect, Actions} from '@ngrx/effects';
 import {Router} from '@angular/router';
@@ -13,10 +15,10 @@ export class UserCertificationsEffects {
               private vendorSvc: VendorService,
               private router: Router) {}
 
-  @Effect() getAllUsersCerts = this.actions$.ofType(userCertActions.GET_ALL_USER_CERTS).switchMap(
+  @Effect() getAllUsersCerts = this.actions$.ofType(userCertActions.GET_ALL_USER_CERTS).pipe(switchMap(
     (action: userCertActions.GetAllUserCerts) => {
       return this.userCertSvc.getAllUserCertifications();
-    }).mergeMap(data => {
+    }),mergeMap(data => {
       if (data.error === null) {
         return [
           {
@@ -28,12 +30,12 @@ export class UserCertificationsEffects {
       return [
         {type: userCertActions.GET_ALL_USER_CERTS_FAILED, payload: 'Could not download certifications.'}
         ];
-  });
+  }),);
 
-  @Effect() getAllVendors = this.actions$.ofType(userCertActions.GET_ALL_VENDORS).switchMap(
+  @Effect() getAllVendors = this.actions$.ofType(userCertActions.GET_ALL_VENDORS).pipe(switchMap(
     (action: userCertActions.GetAllVendors) => {
       return this.vendorSvc.getAllVendors();
-    }).mergeMap(data => {
+    }),mergeMap(data => {
       if (data.error === null) {
         return [
           {
@@ -47,11 +49,11 @@ export class UserCertificationsEffects {
           type: userCertActions.GET_ALL_VENDORS_FAILED,
           payload: 'Could not download vendors.'}
         ];
-    });
+    }),);
 
-  @Effect() tryDeleteUserCert = this.actions$.ofType(userCertActions.TRY_DELETE_USER_CERT).map((action: userCertActions.TryDeleteUserCert) => {
+  @Effect() tryDeleteUserCert = this.actions$.ofType(userCertActions.TRY_DELETE_USER_CERT).pipe(map((action: userCertActions.TryDeleteUserCert) => {
     return action.payload;
-  }).mergeMap((data) => {
+  }),mergeMap((data) => {
     this.router.navigate(['/user-certifications']);
     return [
       {
@@ -59,6 +61,6 @@ export class UserCertificationsEffects {
         payload: data
       }
     ];
-  });
+  }),);
 
 }

@@ -1,6 +1,8 @@
+
+import {catchError, map} from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {of as observableOf} from 'rxjs';
 
 import {API_URL} from '../../shared/constants';
 import {UserCertification} from '../models/user-certification.model';
@@ -16,13 +18,13 @@ export class UserCertificationService {
   constructor(private httpClient: HttpClient) { }
 
   getAllUserCertifications() {
-    return this.httpClient.get(this.USER_CERT_LIST_URL).map((response: any) => {
+    return this.httpClient.get(this.USER_CERT_LIST_URL).pipe(map((response: any) => {
       const userCerts: [UserCertification] = response.results;
       return {userCerts: userCerts, error: null};
-    }).catch( err => {
+    }),catchError( err => {
       const data = {userCerts: null, error: err};
-      return Observable.of(data);
-    });
+      return observableOf(data);
+    }),);
   }
 
   getUserCertificationById(id: number, userCerts: UserCertification[]) {
@@ -35,7 +37,7 @@ export class UserCertificationService {
 
   getUserCertification(id: number) {
     let url = this.USER_CERT_LIST_URL + `${id}/`;
-    return this.httpClient.get(url).map((response: UserCertification) => response);
+    return this.httpClient.get(url).pipe(map((response: UserCertification) => response));
   }
 
   updateUserCertification(userCert: UserCertification) {

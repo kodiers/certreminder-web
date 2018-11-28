@@ -1,3 +1,5 @@
+
+import {map} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 
@@ -21,9 +23,9 @@ export class UserExamService {
     Get UserExam by user certification id
      */
     let params = new HttpParams().set('user_certification', `${userCertId}`);
-    return this.httpClient.get(this.USER_EXAMS_API_URL, {params}).map((response: any) => {
+    return this.httpClient.get(this.USER_EXAMS_API_URL, {params}).pipe(map((response: any) => {
       return response.results;
-    });
+    }));
   }
 
   deleteUserExam(userExamId: number) {
@@ -41,7 +43,7 @@ export class UserExamService {
     const url = this.USER_EXAMS_API_URL + `${userExam.id}/`;
     const data = {"user_certification_id": userExam.user_certification.id, "id": userExam.id, "exam_id": userExam.exam.id,
       "date_of_pass": formatDate(userExam.date_of_pass), "remind_at_date": null};
-    return this.httpClient.patch(url, data).map((response: UserExam) => response);
+    return this.httpClient.patch(url, data).pipe(map((response: UserExam) => response));
   }
 
   createUsersExams(userCertId: number, data: [{exam_id: number, date_of_pass: string}]) {
@@ -64,6 +66,6 @@ export class UserExamService {
      */
     const data = {user_certification_id: userCertId, 'exam_id': examId, 'date_of_pass': formatDate(date),
       'remind_at_date': null};
-    return this.httpClient.post(this.USER_EXAMS_API_URL, data).map((response: UserExam) => response);
+    return this.httpClient.post(this.USER_EXAMS_API_URL, data).pipe(map((response: UserExam) => response));
   }
 }

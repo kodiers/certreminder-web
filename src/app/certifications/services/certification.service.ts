@@ -1,3 +1,5 @@
+
+import {map} from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
@@ -19,15 +21,15 @@ export class CertificationService {
     Get certifications for vendor
      */
     const params = new HttpParams().set('vendor', `${vendor.id}`);
-    return this.http.get(this.CERT_LIST_URL, {params}).map( (response: any) => {
+    return this.http.get(this.CERT_LIST_URL, {params}).pipe(map( (response: any) => {
       return response.results;
-    });
+    }));
   }
 
   public createCertification(data): Observable<Certification> {
     /*
     Create certification
      */
-    return this.http.post(this.CERT_LIST_URL, data).map((response: any) => { return response});
+    return this.http.post(this.CERT_LIST_URL, data).pipe(map((response: any) => { return response}));
   }
 }
