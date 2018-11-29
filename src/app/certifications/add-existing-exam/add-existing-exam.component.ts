@@ -53,7 +53,7 @@ export class AddExistingExamComponent implements OnInit {
   filterExams() {
     if (this.searchStr) {
       this.exams = this.exams.filter((exam) => {
-        return exam.title.toLowerCase().includes(this.searchStr.toLowerCase()) || exam.number.toLowerCase().includes(this.searchStr.toLowerCase());
+        return exam.title.toLowerCase().includes(this.searchStr.toLowerCase()) || (exam.number && exam.number.toLowerCase().includes(this.searchStr.toLowerCase()));
       });
     } else {
       this.resetSearch();
