@@ -1,8 +1,8 @@
+import {Injectable} from '@angular/core';
+import {Router} from '@angular/router';
 
 import {map, switchMap, mergeMap} from 'rxjs/operators';
-import {Injectable} from '@angular/core';
-import {Effect, Actions} from '@ngrx/effects';
-import {Router} from '@angular/router';
+import {Effect, Actions, ofType} from '@ngrx/effects';
 
 import * as userCertActions from './user-certifications.actions';
 import {UserCertificationService} from '../services/user-certification.service';
@@ -15,52 +15,41 @@ export class UserCertificationsEffects {
               private vendorSvc: VendorService,
               private router: Router) {}
 
-  @Effect() getAllUsersCerts = this.actions$.ofType(userCertActions.GET_ALL_USER_CERTS).pipe(switchMap(
-    (action: userCertActions.GetAllUserCerts) => {
+  @Effect() getAllUsersCerts = this.actions$.pipe(
+    ofType(userCertActions.GET_ALL_USER_CERTS),
+    switchMap(() => {
       return this.userCertSvc.getAllUserCertifications();
-    }),mergeMap(data => {
+    }),
+    mergeMap(data => {
       if (data.error === null) {
-        return [
-          {
-          type: userCertActions.SET_ALL_USER_CERTS,
-          payload: data.userCerts
-        }
-        ];
+        return [{type: userCertActions.SET_ALL_USER_CERTS, payload: data.userCerts}];
       }
-      return [
-        {type: userCertActions.GET_ALL_USER_CERTS_FAILED, payload: 'Could not download certifications.'}
-        ];
-  }),);
+      return [{type: userCertActions.GET_ALL_USER_CERTS_FAILED, payload: 'Could not download certifications.'}];
+    })
+  );
 
-  @Effect() getAllVendors = this.actions$.ofType(userCertActions.GET_ALL_VENDORS).pipe(switchMap(
-    (action: userCertActions.GetAllVendors) => {
+  @Effect() getAllVendors = this.actions$.pipe(
+    ofType(userCertActions.GET_ALL_VENDORS),
+    switchMap(() => {
       return this.vendorSvc.getAllVendors();
-    }),mergeMap(data => {
+    }),
+    mergeMap(data => {
       if (data.error === null) {
-        return [
-          {
-            type: userCertActions.SET_ALL_VENDORS,
-            payload: data.vendors
-          }
-          ];
+        return [{type: userCertActions.SET_ALL_VENDORS, payload: data.vendors}];
       }
-      return [
-        {
-          type: userCertActions.GET_ALL_VENDORS_FAILED,
-          payload: 'Could not download vendors.'}
-        ];
-    }),);
+      return [{type: userCertActions.GET_ALL_VENDORS_FAILED, payload: 'Could not download vendors.'}];
+    })
+  );
 
-  @Effect() tryDeleteUserCert = this.actions$.ofType(userCertActions.TRY_DELETE_USER_CERT).pipe(map((action: userCertActions.TryDeleteUserCert) => {
-    return action.payload;
-  }),mergeMap((data) => {
-    this.router.navigate(['/user-certifications']);
-    return [
-      {
-        type: userCertActions.DELETE_USER_CERT,
-        payload: data
-      }
-    ];
-  }),);
+  @Effect() tryDeleteUserCert = this.actions$.pipe(
+    ofType(userCertActions.TRY_DELETE_USER_CERT),
+    map((action: userCertActions.TryDeleteUserCert) => {
+      return action.payload;
+    }),
+    mergeMap((data) => {
+      this.router.navigate(['/user-certifications']);
+      return [{type: userCertActions.DELETE_USER_CERT, payload: data}];
+    })
+  );
 
 }
