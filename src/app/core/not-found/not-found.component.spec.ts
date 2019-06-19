@@ -22,4 +22,14 @@ describe('NotFoundComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should have title', () => {
+    let element = fixture.debugElement.nativeElement;
+    expect(element.querySelector('h1').textContent).toEqual('404. Not found');
+  });
+
+  it('should have paragraph', () => {
+    let element = fixture.debugElement.nativeElement;
+    expect(element.querySelector('p').textContent).toEqual(' Sorry page, which you requested not found! ');
+  });
 });
