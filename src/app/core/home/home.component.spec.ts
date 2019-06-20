@@ -22,4 +22,9 @@ describe('HomeComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should contains reminder', () => {
+    let element = fixture.debugElement.nativeElement;
+    expect(element.querySelector('h1').textContent).toEqual('Re:Minder');
+  });
 });
