@@ -4,13 +4,14 @@ import {MockStore, provideMockStore} from '@ngrx/store/testing';
 import { HeaderComponent } from './header.component';
 import {Store} from '@ngrx/store';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {By} from '@angular/platform-browser';
 
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
   let fixture: ComponentFixture<HeaderComponent>;
-  let store: MockStore<{auth: boolean}>;
-  let initialState = {auth: false};
+  let store: MockStore<{auth: {authenticated: boolean}}>;
+  let initialState = {auth: {authenticated: false}};
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -43,8 +44,22 @@ describe('HeaderComponent', () => {
   });
 
   it('should display log in button', () => {
-    // TODO: fix test
-    let element = fixture.debugElement.nativeElement;
-    expect(element.querySelector('a').textContent).toEqual('Sign In');
+    let element = fixture.debugElement;
+    expect(
+      element.query(
+        By.css('ul.nav.justify-content-end > li.nav-item > a.nav-link')
+      ).nativeElement.textContent
+    ).toContain('Sign In');
+  });
+
+  it('should display logout button', () => {
+    store.setState({auth: { authenticated: true}});
+    fixture.detectChanges();
+    let element = fixture.debugElement;
+    expect(
+      element.query(
+        By.css('ul.nav.justify-content-end > li.nav-item:last-child > a.nav-link')
+      ).nativeElement.textContent
+    ).toContain('Log Out');
   });
 });
