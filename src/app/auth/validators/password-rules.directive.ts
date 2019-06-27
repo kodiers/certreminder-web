@@ -12,7 +12,7 @@ export function passwordRules(control: FormControl):{[key: string]: boolean} {
     return null;
   }
 
-  return {viloaterules: true}
+  return {viloaterules: true};
 }
 
 @Directive({
