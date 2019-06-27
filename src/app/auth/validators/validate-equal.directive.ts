@@ -15,10 +15,7 @@ export class ValidateEqual implements Validator {
   constructor(@Attribute('validateEqual') public validateEqual: string, @Attribute('reverse') public reverse: string) { }
 
   private get isReverse() {
-    if (this.reverse === 'true') {
-      return true;
-    }
-    return false;
+    return this.reverse === 'true';
   }
 
   validate(c: AbstractControl): {[key: string]: any } {
