@@ -1,6 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import {FormsModule} from '@angular/forms';
-import {DebugElement} from '@angular/core';
+import {FormsModule, NgForm} from '@angular/forms';
 import {MockStore, provideMockStore} from '@ngrx/store/testing';
 import {Store, StoreModule, combineReducers} from '@ngrx/store';
 import {By} from '@angular/platform-browser';
@@ -16,9 +15,6 @@ describe('SigninComponent', () => {
   let fixture: ComponentFixture<SigninComponent>;
   let store: MockStore<{auth: {authenticated: boolean}}>;
   let initialState = {auth: {authenticated: false}};
-  let usernameEl: DebugElement;
-  let passwordEl: DebugElement;
-  let formEl: DebugElement;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -41,9 +37,6 @@ describe('SigninComponent', () => {
     fixture = TestBed.createComponent(SigninComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-    usernameEl = fixture.debugElement.query(By.css('input[id=username]'));
-    passwordEl = fixture.debugElement.query(By.css('input[id=password]'));
-    formEl = fixture.debugElement.query(By.css('form'));
   });
 
   it('should create', () => {
@@ -60,12 +53,16 @@ describe('SigninComponent', () => {
   });
 
   it('should submit form', () => {
-    // TODO: debug this
-    usernameEl.nativeElement.value = 'test';
-    passwordEl.nativeElement.value = 'p@ssw0rd';
-    fixture.detectChanges();
-    formEl.nativeElement.dispatchEvent(new Event('submit'));
-    // cmp.onSignin(cmp);
-    expect(store.dispatch).toHaveBeenCalledWith(new authActions.TrySignin({username: undefined, password: undefined}));
+    let fakeForm = <NgForm>{
+      valid: true,
+      value: {
+        username: 'test',
+        password: 'p@ssw0rd'
+      }
+    };
+    component.onSignin(fakeForm);
+    expect(store.dispatch).toHaveBeenCalledWith(
+      new authActions.TrySignin({username: fakeForm.value.username, password: fakeForm.value.password})
+    );
   });
 });
