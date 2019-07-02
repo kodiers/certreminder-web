@@ -22,4 +22,11 @@ describe('NotificationMessageComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should have message', () => {
+    component.message = 'test';
+    fixture.detectChanges();
+    let element = fixture.debugElement.nativeElement.querySelector('div');
+    expect(element.textContent).toEqual(' test ');
+  });
 });

@@ -22,4 +22,11 @@ describe('ErrorMessageComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should have error', () => {
+    component.error = 'test';
+    fixture.detectChanges();
+    let element = fixture.debugElement.nativeElement.querySelector('div');
+    expect(element.textContent).toEqual(' test ');
+  });
 });
