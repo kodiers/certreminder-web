@@ -36,13 +36,13 @@ export class ExamService {
     }));
   }
 
-  public addCertificationToExam(exam: Exam, cerification: Certification) {
+  public addCertificationToExam(exam: Exam, cerification: Certification): Observable<Exam> {
     /*
     Add certification to exam
      */
     const data = {'certification': [cerification.id]};
     const url = this.EXAM_LIST_URL + `add/${exam.id}/`;
-    return this.http.patch(url, data);
+    return this.http.patch(url, data).pipe(map((response: any) => response));
   }
 
   public createNewExam(examData): Observable<Exam> {
