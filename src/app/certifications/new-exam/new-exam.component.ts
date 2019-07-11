@@ -6,7 +6,6 @@ import {Store} from '@ngrx/store';
 import {ToastrService} from 'ngx-toastr';
 
 import * as fromApp from '../../store/app.reducers';
-import {Exam} from '../../shared/models/exam.model';
 import {Certification} from '../../shared/models/certification.model';
 import {ExamService} from '../services/exam.service';
 
