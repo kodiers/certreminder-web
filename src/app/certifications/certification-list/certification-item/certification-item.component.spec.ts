@@ -1,12 +1,12 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {By} from '@angular/platform-browser';
+import {Component, Input} from '@angular/core';
 
 import { CertificationItemComponent } from './certification-item.component';
 import {SharedModule} from '../../../shared/shared.module';
 import {Vendor} from '../../../shared/models/vendor.model';
-import {Component, Input} from '@angular/core';
 import {Certification} from '../../../shared/models/certification.model';
-import {By} from '@angular/platform-browser';
 
 
 @Component({selector: 'app-certification-exam-list', template: ''})
