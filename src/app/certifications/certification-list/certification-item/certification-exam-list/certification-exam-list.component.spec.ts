@@ -82,4 +82,31 @@ describe('CertificationExamListComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should show button \'get exams\'', () => {
+    const element = fixture.debugElement;
+    expect(element.nativeElement.querySelector('button').textContent).toEqual('Show exams');
+  });
+
+  it('should show have exams', () => {
+    component.certification = certification;
+    component.getExams();
+    fixture.detectChanges();
+    expect(component.exams.length).toEqual(1);
+  });
+
+  it('should navigate to add-exam', () => {
+    component.certification = certification;
+    component.vendor = vendor;
+    fixture.detectChanges();
+    component.addExamToCertification();
+    expect(store.dispatch).toHaveBeenCalledWith(
+      new CertActions.CertificationChoosed({certification: certification, vendor: vendor})
+    );
+    expect(component.errorMessage).toBeNull();
+    const spy = router.navigate as jasmine.Spy;
+    const args = spy.calls.first().args;
+    expect(args[0][0]).toEqual('add-exam');
+    expect(args[0][1]).toEqual(certification.id);
+  });
 });
