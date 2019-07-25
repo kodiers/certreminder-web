@@ -3,7 +3,7 @@ import {By} from '@angular/platform-browser';
 import {of} from 'rxjs';
 import {BrowserDynamicTestingModule} from '@angular/platform-browser-dynamic/testing';
 
-import {NgbActiveModal, NgbModal, NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModal, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {MockStore, provideMockStore} from '@ngrx/store/testing';
 import {Store, StoreModule} from '@ngrx/store';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
