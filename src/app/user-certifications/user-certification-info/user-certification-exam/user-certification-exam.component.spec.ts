@@ -75,7 +75,6 @@ describe('UserCertificationExamComponent', () => {
     store = TestBed.get(Store);
     userExamSvc = TestBed.get(UserExamService);
     modalSvc = TestBed.get(NgbModal);
-    // spyOn(modalSvc, 'open').and.callThrough();
     spyOn(store, 'dispatch').and.callThrough();
     spyOn(userExamSvc, 'updateUserExam').and.callThrough();
   }));
