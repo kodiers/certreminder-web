@@ -45,4 +45,9 @@ describe('VendorService', () => {
     const result = vendorService.getVendorById(vendor.id, [vendor]);
     expect(result).toEqual(vendor);
   });
+
+  it('should not get vendor by id', () => {
+    const result = vendorService.getVendorById(100, [vendor]);
+    expect(result).toBeNull();
+  });
 });
