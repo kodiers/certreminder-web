@@ -4,12 +4,8 @@ import {HttpClientTestingModule, HttpTestingController} from '@angular/common/ht
 import { ExamService } from './exam.service';
 import {Certification} from '../../shared/models/certification.model';
 import {API_URL} from '../../shared/constants';
-import {Exam} from '../../shared/models/exam.model';
+import {certification, exam} from '../../shared/tests/fixtures/test-data';
 
-const cert = new Certification(1, new Date(), new Date(), 'test', '5A', 'test.jpg',
-  'test', false, 1);
-const exam = new Exam(1, new Date(), new Date(), 'test', 'test1', 'test', false,
-  [cert.id]);
 
 describe('ExamService', () => {
   let httpTestingController: HttpTestingController;
@@ -34,7 +30,7 @@ describe('ExamService', () => {
 
   it('should get exam for certification', () => {
     const mockResponse = {results: [exam]};
-    examService.getExamsForCertification(cert).subscribe(data => {
+    examService.getExamsForCertification(certification).subscribe(data => {
       let receivedExam = data[0];
       expect(receivedExam.id).toEqual(exam.id);
       expect(receivedExam.created).toEqual(exam.created);
@@ -43,9 +39,9 @@ describe('ExamService', () => {
       expect(receivedExam.number).toEqual(exam.number);
       expect(receivedExam.description).toEqual(exam.description);
       expect(receivedExam.deprecated).toBeFalsy();
-      expect(receivedExam.certification[0]).toEqual(cert.id);
+      expect(receivedExam.certification[0]).toEqual(certification.id);
     });
-    const req = httpTestingController.expectOne(API_URL + `certifications/exam/?certification=${cert.id}`);
+    const req = httpTestingController.expectOne(API_URL + `certifications/exam/?certification=${certification.id}`);
     req.flush(mockResponse);
   });
 
@@ -60,25 +56,25 @@ describe('ExamService', () => {
       expect(receivedExam.number).toEqual(exam.number);
       expect(receivedExam.description).toEqual(exam.description);
       expect(receivedExam.deprecated).toBeFalsy();
-      expect(receivedExam.certification[0]).toEqual(cert.id);
+      expect(receivedExam.certification[0]).toEqual(certification.id);
     });
     const req = httpTestingController.expectOne(API_URL + 'certifications/exam/?certification__vendor=1');
     req.flush(mockResponse);
   });
 
   it('should add certification to exam', () => {
-    const certification = new Certification(2, new Date(), new Date(), 'test', '5A', 'test.jpg',
+    const certification2 = new Certification(2, new Date(), new Date(), 'test', '5A', 'test.jpg',
       'test', false, 1);
     const mockResponse = JSON.parse(JSON.stringify(exam));
-    mockResponse.certification.push(certification.id);
-    examService.addCertificationToExam(exam, certification).subscribe(data => {
+    mockResponse.certification.push(certification2.id);
+    examService.addCertificationToExam(exam, certification2).subscribe(data => {
       expect(data.id).toEqual(exam.id);
       expect(data.title).toEqual(exam.title);
       expect(data.number).toEqual(exam.number);
       expect(data.description).toEqual(exam.description);
       expect(data.deprecated).toBeFalsy();
-      expect(data.certification[0]).toEqual(cert.id);
-      expect(data.certification[1]).toEqual(certification.id);
+      expect(data.certification[0]).toEqual(certification.id);
+      expect(data.certification[1]).toEqual(certification2.id);
     });
     const req = httpTestingController.expectOne(API_URL + `certifications/exam/add/${exam.id}/`);
     req.flush(mockResponse);
@@ -90,7 +86,7 @@ describe('ExamService', () => {
       "description": exam.description,
       "number": exam.number,
       "deprecated": exam.deprecated,
-      "certification": [cert.id]
+      "certification": [certification.id]
     };
     const mockResponse = {...exam};
     examService.createNewExam(examData).subscribe(data => {
@@ -99,7 +95,7 @@ describe('ExamService', () => {
       expect(data.number).toEqual(exam.number);
       expect(data.description).toEqual(exam.description);
       expect(data.deprecated).toBeFalsy();
-      expect(data.certification[0]).toEqual(cert.id);
+      expect(data.certification[0]).toEqual(certification.id);
     });
     const req = httpTestingController.expectOne(API_URL + 'certifications/exam/');
     req.flush(mockResponse);
