@@ -1,7 +1,7 @@
 import { TestBed, inject } from '@angular/core/testing';
+import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 
 import { UserExamService } from './user-exam.service';
-import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 import {userCertification, userExam} from '../../shared/tests/fixtures/test-data';
 import {API_URL} from '../../shared/constants';
 import {UserExam} from '../models/user-exam.model';
