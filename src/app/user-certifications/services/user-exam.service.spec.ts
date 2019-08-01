@@ -56,4 +56,27 @@ describe('UserExamService', () => {
     const req = httpTestingController.expectOne(API_URL + `remainder/exam/${userExam.id}/`);
     req.flush(mockResponse);
   });
+
+  it('should create user exams', () => {
+    const data =
+      {
+        exam_id: userExam.exam_id,
+        date_of_pass: `${userExam.date_of_pass.getFullYear()}-${userExam.date_of_pass.getMonth() + 1}-${userExam.date_of_pass.getDay()}`
+      };
+    const mockResponse = [userExam];
+    userExamService.createUsersExams(userCertification.id, [data]).subscribe(data => {
+      expect(data[0]).toEqual(userExam);
+    });
+    const req = httpTestingController.expectOne(API_URL + 'remainder/exam/bulk/create/');
+    req.flush(mockResponse);
+  });
+
+  it('should create user exam', () => {
+    const mockResponse = userExam;
+    userExamService.createUserExam(userCertification.id, userExam.exam_id, userExam.date_of_pass).subscribe(data => {
+      expect(data).toEqual(userExam);
+    });
+    const req = httpTestingController.expectOne(API_URL + 'remainder/exam/');
+    req.flush(mockResponse);
+  });
 });
