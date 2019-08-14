@@ -18,9 +18,9 @@ export class ProfileComponent implements OnInit {
     this.profileSvc.getUserInfo().subscribe(
       (profile) => {
         this.profile = profile;
-        console.log(this.profile);
       }, (error) => {
         this.errorMessage = 'Could not get profile information!';
+        console.error(error);
       });
   }
 

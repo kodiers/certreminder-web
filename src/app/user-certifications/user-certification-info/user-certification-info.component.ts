@@ -111,7 +111,7 @@ export class UserCertificationInfoComponent implements OnInit, OnDestroy {
   }
 
   deleteUserCert() {
-    this.userCertSvc.deleteUserCertification(this.userCert).subscribe(()=>{
+    this.userCertSvc.deleteUserCertification(this.userCert).subscribe(() => {
       this.store.dispatch(new fromUserCertActions.TryDeleteUserCert(this.userCert));
     }, (err) => {
       this.setErrorMessage('Could not delete user certification');

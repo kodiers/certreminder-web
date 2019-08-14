@@ -15,9 +15,7 @@ export function deleteItemFromArray(arr: any[], itemToDelete: any): any[] {
    */
   const copiedArr = arr.slice();
   const index = copiedArr.indexOf(itemToDelete);
-  if (index !== 1) {
-    copiedArr.splice(index, 1);
-  }
+  copiedArr.splice(index, 1);
   return copiedArr;
 }
 

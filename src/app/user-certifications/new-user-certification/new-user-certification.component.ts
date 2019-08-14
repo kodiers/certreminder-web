@@ -3,7 +3,7 @@ import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 
 import {Store} from '@ngrx/store';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
 
 import * as fromUserCertActions from '../store/user-certifications.actions';
 import * as fromApp from '../../store/app.reducers';
@@ -32,6 +32,7 @@ export class NewUserCertificationComponent implements OnInit {
   certDate = null;
   examDates: Date[] = [];
   errorMessage = null;
+  modalRef: NgbModalRef;
 
   constructor(private store: Store<fromApp.AppState>,
               private certSvc: CertificationService,
@@ -103,9 +104,9 @@ export class NewUserCertificationComponent implements OnInit {
   }
 
   chooseCertDate() {
-    const modalRef = this.modalSvc.open(DateModalComponent);
-    modalRef.componentInstance.title = 'certification expire date';
-    modalRef.result.then(
+    this.modalRef = this.modalSvc.open(DateModalComponent);
+    this.modalRef.componentInstance.title = 'certification expire date';
+    this.modalRef.result.then(
       (result) => {
         this.certDate = result;
         this.userCertForm.patchValue({
@@ -129,9 +130,9 @@ export class NewUserCertificationComponent implements OnInit {
   }
 
   chooseExamDate(i: number) {
-    const modalRef = this.modalSvc.open(DateModalComponent);
-    modalRef.componentInstance.title = 'exam pass date';
-    modalRef.result.then(
+    this.modalRef = this.modalSvc.open(DateModalComponent);
+    this.modalRef.componentInstance.title = 'exam pass date';
+    this.modalRef.result.then(
       (result) => {
         this.examDates.push(result);
         this.setExamDate(result, i);
