@@ -38,7 +38,7 @@ describe('DateModalComponent', () => {
 
   it('should set date', () => {
     const date = new Date();
-    const fakeEvent = {year: date.getFullYear(), month: date.getMonth() + 1, day: date.getDay()};
+    const fakeEvent = {year: date.getFullYear(), month: date.getMonth() + 1, day: date.getDate()};
     component.onCertDateSelect(fakeEvent);
     fixture.detectChanges();
     expect(component.choosedDate.getDate()).toEqual(date.getDate());
