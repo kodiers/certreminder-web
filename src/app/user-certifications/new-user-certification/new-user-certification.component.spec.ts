@@ -2,7 +2,7 @@ import {async, ComponentFixture, TestBed, tick} from '@angular/core/testing';
 
 import { NewUserCertificationComponent } from './new-user-certification.component';
 import {SharedModule} from '../../shared/shared.module';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {FormArray, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {NgSelectModule} from '@ng-select/ng-select';
 import {RouterTestingModule} from '@angular/router/testing';
 import {MockStore, provideMockStore} from '@ngrx/store/testing';
@@ -18,6 +18,10 @@ import {By} from '@angular/platform-browser';
 import {CertificationService} from '../../certifications/services/certification.service';
 import {Certification} from '../../shared/models/certification.model';
 import {ExamService} from '../../certifications/services/exam.service';
+import {DateModalComponent} from '../../shared/views/date-modal/date-modal.component';
+import {NgbModal, NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import {TitleComponent} from '../../shared/views/title/title.component';
 
 
 const certificationServiceMock = {
@@ -32,6 +36,21 @@ const examServiceMock = {
   }
 };
 
+const date = new Date();
+
+const NgbModalStub = {
+  open: () => {
+    return {
+      componentInstance: {
+        title: null
+      },
+      result: new Promise((resolve, reject)=> {
+        resolve(date);
+      })
+    };
+  }
+};
+
 const routerSpy = jasmine.createSpyObj('Router', ['navigate']);
 
 describe('NewUserCertificationComponent', () => {
@@ -42,12 +61,16 @@ describe('NewUserCertificationComponent', () => {
   let router: Router;
   let certSvc: CertificationService;
   let examSvc: ExamService;
+  let modal: NgbModal;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ NewUserCertificationComponent ],
+      declarations: [
+        NewUserCertificationComponent,
+        DateModalComponent,
+        TitleComponent
+      ],
       imports: [
-        SharedModule,
         FormsModule,
         NgSelectModule,
         ReactiveFormsModule,
@@ -56,13 +79,16 @@ describe('NewUserCertificationComponent', () => {
           ...appReducers.reducers,
           feature: userCertReducers.userCertReducer
         }),
-        HttpClientTestingModule
+        HttpClientTestingModule,
+        NgbModule,
+        FontAwesomeModule
       ],
       providers: [
         provideMockStore({initialState}),
         {provide: Router, useValue: routerSpy},
         {provide: CertificationService, useValue: certificationServiceMock},
-        {provide: ExamService, useValue: examServiceMock}
+        {provide: ExamService, useValue: examServiceMock},
+        {provide: NgbModal, useValue: NgbModalStub}
       ]
     })
     .compileComponents();
@@ -70,6 +96,7 @@ describe('NewUserCertificationComponent', () => {
     router = TestBed.get(Router);
     certSvc = TestBed.get(CertificationService);
     examSvc = TestBed.get(ExamService);
+    modal = TestBed.get(NgbModal);
     spyOn(store, 'dispatch').and.callThrough();
   }));
 
@@ -119,5 +146,35 @@ describe('NewUserCertificationComponent', () => {
     fixture.detectChanges();
     expect(component.exams.length).toEqual(1);
     expect(component.exams[0]).toEqual(exam);
+  });
+
+  it('should select date', () => {
+    component.certifications = [certification];
+    component.chooseCertDate();
+    fixture.detectChanges();
+    expect(component.modalRef).toBeTruthy();
+  });
+
+  it('should add exam form', () => {
+    component.certifications = [certification];
+    component.addExam();
+    expect((<FormArray>component.userCertForm.get('exams')).length).toEqual(1);
+  });
+
+  it('should delete exam form', () => {
+    component.certifications = [certification];
+    component.addExam();
+    expect((<FormArray>component.userCertForm.get('exams')).length).toEqual(1);
+    component.deleteExam(0);
+    expect((<FormArray>component.userCertForm.get('exams')).length).toEqual(0);
+  });
+
+  it('should select exam date', () => {
+    component.certifications = [certification];
+    component.addExam();
+    expect((<FormArray>component.userCertForm.get('exams')).length).toEqual(1);
+    component.chooseExamDate(0);
+    fixture.detectChanges();
+    expect(component.modalRef).toBeTruthy();
   });
 });
