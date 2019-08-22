@@ -26,20 +26,24 @@ describe('CertificationExamItemComponent', () => {
   });
 
   it('should display exam title and number', () => {
-    component.exam = exam;
+    component.exam = Object.assign({}, exam);
     fixture.detectChanges();
     const element = fixture.debugElement;
     expect(element.nativeElement.querySelector('h5').textContent).toContain('test');
-    expect(element.query(By.css('div.row > div.col-sm-12 > h5 > span'))).toBeTruthy();
+    expect(
+      element.query(
+        By.css('div.row > div.col-sm-12 > h5 > span')
+      ).nativeElement.textContent
+    ).toContain(exam.number);
   });
 
   it('should display title only', () => {
-    component.exam = exam;
+    component.exam = Object.assign({}, exam);
     fixture.detectChanges();
     component.exam.number = null;
     fixture.detectChanges();
     const element = fixture.debugElement;
-    expect(element.nativeElement.querySelector('h5').textContent).toContain('test');
+    expect(element.nativeElement.querySelector('h5').textContent).toContain(exam.title);
     expect(element.query(By.css('div.row > div.col-sm-12 > h5 > span'))).toBeNull();
   })
 });
