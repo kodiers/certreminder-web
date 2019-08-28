@@ -66,6 +66,11 @@ export class NewUserCertificationComponent implements OnInit {
   private setExamDate(date: Date, i: number) {
     const examControl = (<FormArray>this.userCertForm.controls['exams']).at(i);
     examControl['controls'].date_of_pass.setValue(formatDateToStr(date));
+    if (this.examDates.length < i) {
+      this.examDates.push(date);
+    } else {
+      this.examDates[i] = date;
+    }
   }
 
   selectVendor() {
@@ -134,7 +139,6 @@ export class NewUserCertificationComponent implements OnInit {
     this.modalRef.componentInstance.title = 'exam pass date';
     this.modalRef.result.then(
       (result) => {
-        this.examDates.push(result);
         this.setExamDate(result, i);
       },
       (reason) => {});
