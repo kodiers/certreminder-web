@@ -17,7 +17,7 @@ export const NOT_VALID_TOKEN = 'NOT_VALID_TOKEN';
 export class TrySignup implements Action {
   readonly type = TRY_SIGNUP;
 
-  constructor(public payload: {username: string, password: string, confirm_password: string}) {}
+  constructor(public payload: {username: string, email: string, password: string, confirm_password: string}) {}
 }
 
 export class TrySignin implements Action {

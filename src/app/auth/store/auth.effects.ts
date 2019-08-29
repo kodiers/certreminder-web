@@ -18,7 +18,7 @@ export class AuthEffects {
       return action.payload;
     }),
     switchMap(data => {
-      return this.authSvc.registerUser(data.username, data.password, data.confirm_password);
+      return this.authSvc.registerUser(data.username, data.email, data.password, data.confirm_password);
     }),
     mergeMap(data => {
       if (data.error === null) {

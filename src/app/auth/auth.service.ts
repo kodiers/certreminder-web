@@ -14,9 +14,10 @@ export class AuthService {
 
   constructor(private httpClient: HttpClient) {}
 
-  registerUser(username: string, password: string, password_confirmation: string) {
-    let url = `${API_URL}people/register/`;
-    return this.httpClient.post(url, {"username": username, "password": password, "confirm_password": password_confirmation}).pipe(map(response => {
+  registerUser(username: string, email: string, password: string, password_confirmation: string) {
+    let url = `${API_URL}v2/people/register/`;
+    const data = {"username": username, "email": email, "password": password, "confirm_password": password_confirmation};
+    return this.httpClient.post(url, data).pipe(map(response => {
       return {user: response, error: null};
     }),catchError(error => {
       const data = {user: null, error: error};

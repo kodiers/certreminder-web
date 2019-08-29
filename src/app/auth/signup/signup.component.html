@@ -18,7 +18,31 @@
         >
       </div>
       <div class="form-group">
-        <app-question-icon placement="top" tooltip="Password should be 8+ charcters, don't be same as username and cannot contains only digits"></app-question-icon>
+        <app-question-icon
+          placement="top"
+          tooltip="Your email should be in format: email@domain.dom">
+        </app-question-icon>
+        <label for="email">Enter your email</label>
+        <input
+          type="email"
+          id="email"
+          class="form-control"
+          placeholder="Enter your email"
+          name="email"
+          required
+          ngModel
+          [email]="true"
+          #email="ngModel"
+        >
+        <div *ngIf="!email.valid && email.touched" class="alert alert-danger">
+          Your email should be in format: email@domain.dom
+        </div>
+      </div>
+      <div class="form-group">
+        <app-question-icon
+          placement="top"
+          tooltip="Password should be 8+ charcters, don't be same as username and cannot contains only digits">
+        </app-question-icon>
         <label for="password">Enter your password:</label>
         <input
           type="password"
@@ -41,7 +65,10 @@
         </div>
       </div>
       <div class="form-group">
-        <app-question-icon placement="top" tooltip="Password and password confirmation should be same"></app-question-icon>
+        <app-question-icon
+          placement="top"
+          tooltip="Password and password confirmation should be same">
+        </app-question-icon>
         <label for="confirm_password">Confirm your password:</label>
         <input
           type="password"
