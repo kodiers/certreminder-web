@@ -27,8 +27,14 @@ export class SignupComponent implements OnInit {
     if (form.valid) {
       const username = form.value.username;
       const password = form.value.password;
+      const email = form.value.email;
       const confirm_password = form.value.confirm_password;
-      this.store.dispatch(new fromAuthActions.TrySignup({username: username, password: password, confirm_password: confirm_password}));
+      this.store.dispatch(new fromAuthActions.TrySignup({
+        username: username,
+        email: email,
+        password: password,
+        confirm_password: confirm_password
+      }));
     }
   }
 

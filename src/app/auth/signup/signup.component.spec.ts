@@ -59,6 +59,7 @@ describe('SignupComponent', () => {
       valid: true,
       value: {
         username: 'test',
+        email: 'test@test.com',
         password: 'p@ssw0rd',
         confirm_password: 'p@ssw0rd'
       }
@@ -67,6 +68,7 @@ describe('SignupComponent', () => {
     expect(store.dispatch).toHaveBeenCalledWith(
       new authActions.TrySignup({
         username: fakeForm.value.username,
+        email: fakeForm.value.email,
         password: fakeForm.value.password,
         confirm_password: fakeForm.value.confirm_password
       })
