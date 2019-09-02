@@ -13,13 +13,15 @@ import {AuthRoutingModule} from './auth-routing.module';
 import { PasswordRules } from './validators/password-rules.directive';
 import { ValidateEqual } from './validators/validate-equal.directive';
 import {UserCertificationsRoutingModule} from '../user-certifications/user-certifications.routing.module';
+import { RestorePasswordComponent } from './restore-password/restore-password.component';
 
 @NgModule({
   declarations: [
     SigninComponent,
     SignupComponent,
     PasswordRules,
-    ValidateEqual
+    ValidateEqual,
+    RestorePasswordComponent
   ],
   imports: [
     CommonModule,
