@@ -1,5 +1,5 @@
 
-import {of as observableOf} from 'rxjs';
+import {of, of as observableOf} from 'rxjs';
 
 import {map, catchError} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
@@ -61,5 +61,17 @@ export class AuthService {
     const error = 'No token';
     const data = {token: null, error: error};
     return observableOf(data);
+  }
+
+  resetPassword(email: string) {
+    let url = `${API_URL}v2/people/password/reset/`;
+    const data = {email: email};
+    return this.httpClient.post(url, data).pipe(
+      map((response: any) => {
+        return {result: 'ok', error: null};
+      }), catchError(error => {
+        const data = {result: null, error: error};
+        return of(data);
+      }))
   }
 }

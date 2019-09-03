@@ -13,6 +13,9 @@ export const VERIFY_TOKEN = 'VERIFY_TOKEN';
 export const SIGNUP_FAILURE = 'SIGNUP_FAILURE';
 export const SIGNIN_FAILURE = 'SIGNIN_FAILURE';
 export const NOT_VALID_TOKEN = 'NOT_VALID_TOKEN';
+export const TRY_RESET_PASSWORD = 'TRY_RESET_PASSWORD';
+export const RESET_PASSWORD = 'RESET_PASSWORD';
+export const RESET_PASSWORD_FAILURE = 'RESET_PASSWORD_FAILURE';
 
 export class TrySignup implements Action {
   readonly type = TRY_SIGNUP;
@@ -77,5 +80,22 @@ export class NotValidToken implements Action {
   readonly type = NOT_VALID_TOKEN;
 }
 
+export class TryResetPassword implements Action {
+  readonly type = TRY_RESET_PASSWORD;
+
+  constructor(public payload: {email: string}) {}
+}
+
+export class ResetPassword implements Action {
+  readonly type = RESET_PASSWORD;
+}
+
+export class ResetPasswordFailure implements Action {
+  readonly type = RESET_PASSWORD_FAILURE;
+
+  constructor(public payload: any) {}
+}
+
 export type AuthActions = Signup | Signin | Logout | SetToken | TrySignup | TrySignin | GetProfile | HasValidToken
-  | SigninFailure | SignupFailure | VerifyToken | NotValidToken;
+  | SigninFailure | SignupFailure | VerifyToken | NotValidToken | TryResetPassword | ResetPassword
+  | ResetPasswordFailure;

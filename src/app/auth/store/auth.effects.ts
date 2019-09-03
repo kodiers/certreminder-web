@@ -99,4 +99,20 @@ export class AuthEffects {
     ofType(fromAuthActions.SIGNUP_FAILURE)
   );
 
+  @Effect() authResetPassword = this.actions$.pipe(
+    ofType(fromAuthActions.TRY_RESET_PASSWORD),
+    map((action: fromAuthActions.TryResetPassword) => {
+      return action.payload
+    }),
+    switchMap((data: {email: string}) => {
+      return this.authSvc.resetPassword(data.email)
+    }),
+    mergeMap(data => {
+      if (data.error == null) {
+        return [{type: fromAuthActions.RESET_PASSWORD}];
+      }
+      return [{type: fromAuthActions.RESET_PASSWORD_FAILURE, payload: data.error}];
+    })
+  );
+
 }
