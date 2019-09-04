@@ -14,6 +14,7 @@ import { PasswordRules } from './validators/password-rules.directive';
 import { ValidateEqual } from './validators/validate-equal.directive';
 import {UserCertificationsRoutingModule} from '../user-certifications/user-certifications.routing.module';
 import { RestorePasswordComponent } from './restore-password/restore-password.component';
+import { RestorePasswordConfirmComponent } from './restore-password-confirm/restore-password-confirm.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { RestorePasswordComponent } from './restore-password/restore-password.co
     SignupComponent,
     PasswordRules,
     ValidateEqual,
-    RestorePasswordComponent
+    RestorePasswordComponent,
+    RestorePasswordConfirmComponent
   ],
   imports: [
     CommonModule,
