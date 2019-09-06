@@ -84,6 +84,17 @@ export function authReducer(state = getInitialAuthState(), action: AuthActions.A
         message: 'Reset email was sent. Check your email.',
         errorMessage: null
       };
+    case (AuthActions.RESET_PASSWORD_CONFIRM_FAILURE):
+      return {
+        ...state,
+        errorMessage: action.payload
+      };
+    case (AuthActions.RESET_PASSWORD_CONFIRM):
+      return {
+        ...state,
+        message: 'Your password was successfully reset.',
+        errorMessage: null
+      };
     default:
       return state;
   }

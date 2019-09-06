@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-
-import * as fromApp from '../../store/app.reducers';
-import * as fromAuthActions from '../store/auth.actions';
-import * as fromAuth from '../../auth/store/auth.reducers';
-import {Store} from '@ngrx/store';
-import {Observable} from 'rxjs';
 import {NgForm} from '@angular/forms';
+import {Observable} from 'rxjs';
+
+import {Store} from '@ngrx/store';
+
+import * as fromApp from '../../../store/app.reducers';
+import * as fromAuthActions from '../../store/auth.actions';
+import * as fromAuth from '../../store/auth.reducers';
+
 
 @Component({
   selector: 'app-restore-password',

@@ -1,5 +1,4 @@
-
-import {of, of as observableOf} from 'rxjs';
+import {Observable, of, of as observableOf} from 'rxjs';
 
 import {map, catchError} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
@@ -41,7 +40,8 @@ export class AuthService {
     let url = `${API_URL}people/api-token-auth/`;
     return this.httpClient.post(url, {"username": username, "password": password}).pipe(map((response: any) => {
       return {token: response.token, error: null};
-    }),catchError(error => {
+    }),
+    catchError(error => {
       const data = {token: null, error: error};
       return observableOf(data);
     }),);
@@ -63,15 +63,30 @@ export class AuthService {
     return observableOf(data);
   }
 
-  resetPassword(email: string) {
-    let url = `${API_URL}v2/people/password/reset/`;
+  resetPassword(email: string): Observable<{result: string, error: any}> {
+    const url = `${API_URL}v2/people/password/reset/`;
     const data = {email: email};
     return this.httpClient.post(url, data).pipe(
       map((response: any) => {
         return {result: 'ok', error: null};
-      }), catchError(error => {
+      }),
+      catchError(error => {
         const data = {result: null, error: error};
         return of(data);
-      }))
+      }));
+  }
+
+  resetPasswordConfirm(token: string, password: string, password_confirmation: string) {
+    const url = `${API_URL}v2/people/password/reset/confirm/`;
+    const data = {token: token, password: password, confirm_password: password_confirmation};
+    return this.httpClient.post(url, data).pipe(
+      map((response: any) => {
+        return {result: 'ok', error: null};
+      }),
+      catchError(error => {
+        const data = {result: null, error: error};
+        return of(data);
+      })
+    );
   }
 }

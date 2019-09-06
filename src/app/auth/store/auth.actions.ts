@@ -16,6 +16,9 @@ export const NOT_VALID_TOKEN = 'NOT_VALID_TOKEN';
 export const TRY_RESET_PASSWORD = 'TRY_RESET_PASSWORD';
 export const RESET_PASSWORD = 'RESET_PASSWORD';
 export const RESET_PASSWORD_FAILURE = 'RESET_PASSWORD_FAILURE';
+export const TRY_RESET_PASSWORD_CONFIRM = 'TRY_RESET_PASSWORD_CONFIRM';
+export const RESET_PASSWORD_CONFIRM = 'RESET_PASSWORD_CONFIRM';
+export const RESET_PASSWORD_CONFIRM_FAILURE = 'RESET_PASSWORD_CONFIRM_FAILURE';
 
 export class TrySignup implements Action {
   readonly type = TRY_SIGNUP;
@@ -96,6 +99,22 @@ export class ResetPasswordFailure implements Action {
   constructor(public payload: any) {}
 }
 
+export class TryResetPasswordConfirm implements Action {
+  readonly type = TRY_RESET_PASSWORD_CONFIRM;
+
+  constructor(public payload: {token: string, password: string, confirm_password: string}) {}
+}
+
+export class ResetPasswordConfirm implements Action {
+  readonly type = RESET_PASSWORD_CONFIRM;
+}
+
+export class ResetPasswordConfirmFailure implements Action {
+  readonly type = RESET_PASSWORD_CONFIRM_FAILURE;
+
+  constructor(public payload: any) {}
+}
+
 export type AuthActions = Signup | Signin | Logout | SetToken | TrySignup | TrySignin | GetProfile | HasValidToken
   | SigninFailure | SignupFailure | VerifyToken | NotValidToken | TryResetPassword | ResetPassword
-  | ResetPasswordFailure;
+  | ResetPasswordFailure | TryResetPasswordConfirm | ResetPasswordConfirm | ResetPasswordConfirmFailure;
