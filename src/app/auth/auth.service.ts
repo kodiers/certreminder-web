@@ -4,8 +4,9 @@ import {map, catchError} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 
-
 import {API_URL} from '../shared/constants';
+import {extractErrorMessage} from '../shared/helpers/functions';
+
 
 @Injectable()
 export class AuthService {
@@ -84,7 +85,8 @@ export class AuthService {
         return {result: 'ok', error: null};
       }),
       catchError(error => {
-        const data = {result: null, error: error};
+        const errorMessage = extractErrorMessage(error);
+        const data = {result: null, error: errorMessage};
         return of(data);
       })
     );
