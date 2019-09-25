@@ -6,6 +6,7 @@ export interface State {
   authenticated: boolean;
   profile: Profile;
   errorMessage: any;
+  message: string;
 }
 
 export function getInitialAuthState(): State {
@@ -14,7 +15,8 @@ export function getInitialAuthState(): State {
     token: token,
     authenticated: false,
     profile: null,
-    errorMessage: null
+    errorMessage: null,
+    message: null
   }
 }
 
@@ -70,6 +72,28 @@ export function authReducer(state = getInitialAuthState(), action: AuthActions.A
         authenticated: false,
         token: null,
         profile: null
+      };
+    case (AuthActions.RESET_PASSWORD_FAILURE):
+      return {
+        ...state,
+        errorMessage: action.payload
+      };
+    case (AuthActions.RESET_PASSWORD):
+      return {
+        ...state,
+        message: 'Reset email was sent. Check your email.',
+        errorMessage: null
+      };
+    case (AuthActions.RESET_PASSWORD_CONFIRM_FAILURE):
+      return {
+        ...state,
+        errorMessage: action.payload
+      };
+    case (AuthActions.RESET_PASSWORD_CONFIRM):
+      return {
+        ...state,
+        message: 'Your password was successfully reset.',
+        errorMessage: null
       };
     default:
       return state;

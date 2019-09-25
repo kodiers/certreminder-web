@@ -99,4 +99,37 @@ export class AuthEffects {
     ofType(fromAuthActions.SIGNUP_FAILURE)
   );
 
+  @Effect() authResetPassword = this.actions$.pipe(
+    ofType(fromAuthActions.TRY_RESET_PASSWORD),
+    map((action: fromAuthActions.TryResetPassword) => {
+      return action.payload
+    }),
+    switchMap((data: {email: string}) => {
+      return this.authSvc.resetPassword(data.email)
+    }),
+    mergeMap(data => {
+      if (data.error == null) {
+        return [{type: fromAuthActions.RESET_PASSWORD}];
+      }
+      return [{type: fromAuthActions.RESET_PASSWORD_FAILURE, payload: data.error}];
+    })
+  );
+
+  @Effect() authResetPasswordConfirm = this.actions$.pipe(
+    ofType(fromAuthActions.TRY_RESET_PASSWORD_CONFIRM),
+    map((action: fromAuthActions.TryResetPasswordConfirm) => {
+      return action.payload;
+    }),
+    switchMap((data: {token: string, password: string, confirm_password: string}) => {
+      return this.authSvc.resetPasswordConfirm(data.token, data.password, data.confirm_password);
+    }),
+    mergeMap(data => {
+      if (data.error == null) {
+        this.router.navigate(['/password/success']);
+        return [{type: fromAuthActions.RESET_PASSWORD_CONFIRM}];
+      }
+      return [{type: fromAuthActions.RESET_PASSWORD_CONFIRM_FAILURE, payload: data.error}];
+    })
+  );
+
 }

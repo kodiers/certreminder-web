@@ -13,13 +13,19 @@ import {AuthRoutingModule} from './auth-routing.module';
 import { PasswordRules } from './validators/password-rules.directive';
 import { ValidateEqual } from './validators/validate-equal.directive';
 import {UserCertificationsRoutingModule} from '../user-certifications/user-certifications.routing.module';
+import { RestorePasswordComponent } from './restore-password/restore-password/restore-password.component';
+import { RestorePasswordConfirmComponent } from './restore-password/restore-password-confirm/restore-password-confirm.component';
+import { RestorePasswordConfirmSuccessComponent } from './restore-password/restore-password-confirm-success/restore-password-confirm-success.component';
 
 @NgModule({
   declarations: [
     SigninComponent,
     SignupComponent,
     PasswordRules,
-    ValidateEqual
+    ValidateEqual,
+    RestorePasswordComponent,
+    RestorePasswordConfirmComponent,
+    RestorePasswordConfirmSuccessComponent
   ],
   imports: [
     CommonModule,
