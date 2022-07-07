@@ -30,7 +30,7 @@
     "@ngrx/store": "^6.1.2",
     "bootstrap": "^4.1.1",
     "core-js": "^2.5.4",
-    "moment": "^2.22.2",
+    "moment": "^2.29.4",
     "ngx-spinner": "^6.1.2",
     "ngx-toastr": "^9.1.1",
     "node-sass": "^4.10.0",
